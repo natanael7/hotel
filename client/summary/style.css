@@ -1,0 +1,117 @@
+* {
+  font-family: "Onest";
+  line-height: 1.5;
+}
+
+.title {
+  text-align: center;
+  font-size: 30px;
+  margin-top: 30px;
+}
+.line {
+  margin: 0;
+  border: none;
+  background: black;
+
+  display: block;
+  height: 1px;
+  background: transparent;
+  width: 100%;
+  border: none;
+  border-top: solid 1px black;
+}
+.container {
+  padding-left: 40px;
+}
+.container-meal {
+  font-size: 20px;
+  font-weight: 400;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 1em;
+  padding-left: 10px;
+}
+.container-time {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  width: 28em;
+}
+.container-type {
+  display: flex;
+  justify-content: space-between;
+  width: 10em;
+  padding-left: 10px;
+  margin-top: 1em;
+}
+.time-line {
+  margin-top: -8px;
+  border-top: solid 3px black;
+  width: 28em;
+}
+.type-line {
+  height: 1.5px;
+  width: 10em;
+  margin-top: -6px;
+  margin-bottom: 1em;
+  margin-left: 10px;
+}
+
+.time {
+  font-size: 30px;
+  font-weight: 600;
+}
+.type {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.meal-value {
+  font-weight: 500;
+}
+.pranzo-container {
+  display: flex;
+  flex-direction: column;
+}
+.meal-allergeni {
+  white-space: pre-line;
+  font-size: 18px;
+  line-height: normal;
+  columns: 290px 3;
+  column-gap: 2rem;
+  column-rule: 1px solid #f1f1f1;
+}
+.last-section {
+  padding-bottom: 50px;
+}
+@media only screen and(max-width: 546px) {
+  .container-time {
+    width: 80%;
+  }
+  .container-type {
+    width: 40%;
+  }
+  .time-line {
+    width: 80%;
+  }
+  .type-line {
+    width: 40%;
+  }
+  .container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .meal {
+    max-width: 276px;
+  }
+}
+@media print {
+  .secondary-container > .pranzo-container,
+  .container {
+    page-break-after: always;
+  }
+  .container {
+    padding-left: 15px;
+  }
+}

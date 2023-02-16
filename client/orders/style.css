@@ -1,0 +1,72 @@
+body {
+  font-family: arial, sans-serif;
+}
+.order-table__body {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.order-table__data-cell,
+.order-table__header-cell {
+  border: 1px solid #8a8a8a;
+  text-align: left;
+  padding: 8px;
+  white-space: pre-line;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.order-table__header-cell {
+  background-color: #dddddd;
+  font-weight: bold;
+}
+
+.order-table__body {
+  display: grid;
+  grid-template-columns: repeat(17, auto);
+}
+.checkbox-container {
+  display: flex;
+  flex-wrap: wrap;
+  /* align-items: center; */
+  gap: 1em;
+  width: 100%;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.checkbox-input {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ddd;
+  margin-right: 10px;
+}
+
+.checkbox-label {
+  font-size: 16px;
+  color: #333;
+}
+
+.checkbox-input:checked + .checkbox-label {
+  color: #000;
+}
+button[data-click='["action","Yes","event"]'] {
+  background-color: rgb(222, 68, 70) !important;
+  background-image: none;
+  color: white;
+}
+button[data-click='["action","No","event"]'] {
+  background-color: rgb(63, 143, 61);
+  background-image: none;
+  color: white;
+}
+.w2ui-popup {
+  height: 150px !important;
+}

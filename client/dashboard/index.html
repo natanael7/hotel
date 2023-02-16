@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+    <script src="./script.js" async defer></script>
+
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="meal-type header" id="pranzo">Pranzo</div>
+      <div class="meal-order header" id="pranzo-primo">Primo</div>
+      <div class="meal-order header flex-order" id="pranzo-secondo">
+        Secondo
+      </div>
+      <div class="meal-number header">Opzione 1</div>
+      <div class="meal-number header">Opzione 2</div>
+      <div class="meal-number header">Opzione 3</div>
+      <div class="meal-number header flex-order">Opzione 1</div>
+      <div class="meal-number header flex-order">Opzione 2</div>
+      <div class="meal-number header flex-order">Opzione 3</div>
+      <input
+        type="text"
+        class="meal-number"
+        id="pranzo-primo-1-title"
+        placeholder="Titolo"
+      />
+      <input
+        type="text"
+        class="meal-number"
+        id="pranzo-primo-2-title"
+        placeholder="Titolo"
+      />
+      <input
+        type="text"
+        class="meal-number"
+        id="pranzo-primo-3-title"
+        placeholder="Titolo"
+      />
+      <input
+        type="text"
+        class="meal-number flex-order"
+        id="pranzo-secondo-1-title"
+        placeholder="Titolo"
+      />
+      <input
+        type="text"
+        class="meal-number flex-order"
+        id="pranzo-secondo-2-title"
+        placeholder="Titolo"
+      />
+      <input
+        type="text"
+        class="meal-number flex-order"
+        id="pranzo-secondo-3-title"
+        placeholder="Titolo"
+      />
+      <textarea
+        id="pranzo-primo-1-description"
+        type="text"
+        class="meal-number"
+        placeholder="Descrizione"
+      ></textarea>
+      <textarea
+        id="pranzo-primo-2-description"
+        type="text"
+        class="meal-number"
+        placeholder="Descrizione"
+      ></textarea>
+      <textarea
+        id="pranzo-primo-3-description"
+        type="text"
+        class="meal-number"
+        placeholder="Descrizione"
+      ></textarea>
+      <textarea
+        id="pranzo-secondo-1-description"
+        type="text"
+        class="meal-number flex-order"
+        placeholder="Descrizione"
+      ></textarea>
+      <textarea
+        id="pranzo-secondo-2-description"
+        type="text"
+        class="meal-number flex-order"
+        placeholder="Descrizione"
+      ></textarea>
+      <textarea
+        id="pranzo-secondo-3-description"
+        type="text"
+        class="meal-number flex-order"
+        placeholder="Descrizione"
+      ></textarea>
+
+      <div class="meal-number image-input-container">
+        <input
+          type="button"
+          value="Image"
+          class="meal-image-input-button"
+          onclick="document.getElementById('pranzo-primo-1-imageInput').click();"
+        />
+        <input
+          class="meal-image-input"
+          id="pranzo-primo-1-imageInput"
+          type="file"
+          accept="image/*"
+          onchange="document.getElementById('pranzo-primo-1-image').src = window.URL.createObjectURL(this.files[0])"
+        /><img class="meal-image" id="pranzo-primo-1-image" />
+      </div>
+      <div class="meal-number image-input-container">
+        <input
+          type="button"
+          value="Image"
+          class="meal-image-input-button"
+          onclick="document.getElementById('pranzo-primo-2-imageInput').click();"
+        />
+        <input
+          class="meal-image-input"
+          id="pranzo-primo-2-imageInput"
+          type="file"
+          accept="image/*"
+          onchange="document.getElementById('pranzo-primo-2-image').src = window.URL.createObjectURL(this.files[0])"
+        /><img class="meal-image" id="pranzo-primo-2-image" />
+      </div>
+      <div class="meal-number image-input-container">
+        <input
+          type="button"
+          value="Image"
+          class="meal-image-input-button"
+          onclick="document.getElementById('pranzo-primo-3-imageInput').click();"
+        />
+        <input
+          class="meal-image-input"
+          id="pranzo-primo-3-imageInput"
+          type="file"
+          accept="image/*"
+          onchange="document.getElementById('pranzo-primo-3-image').src = window.URL.createObjectURL(this.files[0])"
+        /><img class="meal-image" id="pranzo-primo-3-image" />
+      </div>
+      <div class="meal-number image-input-container">
+        <input
+          type="button"
+          value="Image"
+          class="meal-image-input-button"
+          onclick="document.getElementById('pranzo-secondo-1-imageInput').click();"
+        />
+        <input
+          class="meal-image-input"
+          id="pranzo-secondo-1-imageInput"
+          type="file"
+          accept="image/*"
+          onchange="document.getElementById('pranzo-secondo-1-image').src = window.URL.createObjectURL(this.files[0])"
+        /><img class="meal-image" id="pranzo-secondo-1-image" />
+      </div>
+      <div class="meal-number image-input-container">
+        <input
+          type="button"
+          value="Image"
+          class="meal-image-input-button"
+          onclick="document.getElementById('pranzo-secondo-2-imageInput').click();"
+        />
+        <input
+          class="meal-image-input"
+          id="pranzo-secondo-2-imageInput"
+          type="file"
+          accept="image/*"
+          onchange="document.getElementById('pranzo-secondo-2-image').src = window.URL.createObjectURL(this.files[0])"
+        /><img class="meal-image" id="pranzo-secondo-2-image" />
+      </div>
+      <div class="meal-number image-input-container">
+        <input
+          type="button"
+          value="Image"
+          class="meal-image-input-button"
+          onclick="document.getElementById('pranzo-secondo-3-imageInput').click();"
+        />
+        <input
+          class="meal-image-input"
+          id="pranzo-secondo-3-imageInput"
+          type="file"
+          accept="image/*"
+          onchange="document.getElementById('pranzo-secondo-3-image').src = window.URL.createObjectURL(this.files[0])"
+        /><img class="meal-image" id="pranzo-secondo-3-image" />
+      </div>
+    </div>
+    <div class="container">
+      <div class="meal-type header" id="cena">Cena</div>
+      <div class="meal-order header" id="cena-primo">Primo</div>
+      <div class="meal-order header flex-order" id="cena-secondo">Secondo</div>
+      <div class="meal-number header">Opzione 1</div>
+      <div class="meal-number header">Opzione 2</div>
+      <div class="meal-number header">Opzione 3</div>
+      <div class="meal-number header flex-order">Opzione 1</div>
+      <div class="meal-number header flex-order">Opzione 2</div>
+      <div class="meal-number header flex-order">Opzione 3</div>
+      <input
+        type="text"
+        class="meal-number"
+        id="cena-primo-1-title"
+        placeholder="Titolo"
+      />
+      <input
+        type="text"
+        class="meal-number"
+        id="cena-primo-2-title"
+        placeholder="Titolo"
+      />
+      <input
+        type="text"
+        class="meal-number"
+        id="cena-primo-3-title"
+        placeholder="Titolo"
+      />
+      <input
+        type="text"
+        class="meal-number flex-order"
+        id="cena-secondo-1-title"
+        placeholder="Titolo"
+      />
+      <input
+        type="text"
+        class="meal-number flex-order"
+        id="cena-secondo-2-title"
+        placeholder="Titolo"
+      />
+      <input
+        type="text"
+        class="meal-number flex-order"
+        id="cena-secondo-3-title"
+        placeholder="Titolo"
+      />
+      <textarea
+        id="cena-primo-1-description"
+        type="text"
+        class="meal-number"
+        placeholder="Descrizione"
+      ></textarea>
+      <textarea
+        id="cena-primo-2-description"
+        type="text"
+        class="meal-number"
+        placeholder="Descrizione"
+      ></textarea>
+      <textarea
+        id="cena-primo-3-description"
+        type="text"
+        class="meal-number"
+        placeholder="Descrizione"
+      ></textarea>
+      <textarea
+        id="cena-secondo-1-description"
+        type="text"
+        class="meal-number flex-order"
+        placeholder="Descrizione"
+      ></textarea>
+      <textarea
+        id="cena-secondo-2-description"
+        type="text"
+        class="meal-number flex-order"
+        placeholder="Descrizione"
+      ></textarea>
+      <textarea
+        id="cena-secondo-3-description"
+        type="text"
+        class="meal-number flex-order"
+        placeholder="Descrizione"
+      ></textarea>
+
+      <div class="meal-number image-input-container">
+        <input
+          type="button"
+          value="Image"
+          class="meal-image-input-button"
+          onclick="document.getElementById('cena-primo-1-imageInput').click();"
+        />
+        <input
+          class="meal-image-input"
+          id="cena-primo-1-imageInput"
+          type="file"
+          accept="image/*"
+          onchange="document.getElementById('cena-primo-1-image').src = window.URL.createObjectURL(this.files[0])"
+        /><img class="meal-image" id="cena-primo-1-image" />
+      </div>
+      <div class="meal-number image-input-container">
+        <input
+          type="button"
+          value="Image"
+          class="meal-image-input-button"
+          onclick="document.getElementById('cena-primo-2-imageInput').click();"
+        />
+        <input
+          class="meal-image-input"
+          id="cena-primo-2-imageInput"
+          type="file"
+          accept="image/*"
+          onchange="document.getElementById('cena-primo-2-image').src = window.URL.createObjectURL(this.files[0])"
+        /><img class="meal-image" id="cena-primo-2-image" />
+      </div>
+      <div class="meal-number image-input-container">
+        <input
+          type="button"
+          value="Image"
+          class="meal-image-input-button"
+          onclick="document.getElementById('cena-primo-3-imageInput').click();"
+        />
+        <input
+          class="meal-image-input"
+          id="cena-primo-3-imageInput"
+          type="file"
+          accept="image/*"
+          onchange="document.getElementById('cena-primo-3-image').src = window.URL.createObjectURL(this.files[0])"
+        /><img class="meal-image" id="cena-primo-3-image" />
+      </div>
+      <div class="meal-number image-input-container">
+        <input
+          type="button"
+          value="Image"
+          class="meal-image-input-button"
+          onclick="document.getElementById('cena-secondo-1-imageInput').click();"
+        />
+        <input
+          class="meal-image-input"
+          id="cena-secondo-1-imageInput"
+          type="file"
+          accept="image/*"
+          onchange="document.getElementById('cena-secondo-1-image').src = window.URL.createObjectURL(this.files[0])"
+        /><img class="meal-image" id="cena-secondo-1-image" />
+      </div>
+      <div class="meal-number image-input-container">
+        <input
+          type="button"
+          value="Image"
+          class="meal-image-input-button"
+          onclick="document.getElementById('cena-secondo-2-imageInput').click();"
+        />
+        <input
+          class="meal-image-input"
+          id="cena-secondo-2-imageInput"
+          type="file"
+          accept="image/*"
+          onchange="document.getElementById('cena-secondo-2-image').src = window.URL.createObjectURL(this.files[0])"
+        /><img class="meal-image" id="cena-secondo-2-image" />
+      </div>
+      <div class="meal-number image-input-container">
+        <input
+          type="button"
+          value="Image"
+          class="meal-image-input-button"
+          onclick="document.getElementById('cena-secondo-3-imageInput').click();"
+        />
+        <input
+          class="meal-image-input"
+          id="cena-secondo-3-imageInput"
+          type="file"
+          accept="image/*"
+          onchange="document.getElementById('cena-secondo-3-image').src = window.URL.createObjectURL(this.files[0])"
+        /><img class="meal-image" id="cena-secondo-3-image" />
+      </div>
+    </div>
+    <button class="submit" id="clear">Pulisci</button>
+    <button class="submit" id="save">Salva</button>
+    <button class="submit" id="submit">Invia</button>
+  </body>
+</html>

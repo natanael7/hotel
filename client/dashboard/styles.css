@@ -1,0 +1,129 @@
+* {
+  font-family: "Lato", "Montserrat", "Arial", sans-serif;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1rem;
+}
+
+.meal-type {
+  width: 100%;
+  padding: 1rem 0;
+  background-color: #e0e0e0;
+  font-weight: bold;
+}
+
+.meal-order {
+  width: 50%;
+  padding: 1rem 0;
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+.meal-number {
+  width: calc(100% / 6);
+  padding: 1rem 0;
+  border: 1px solid #d0d0d0;
+  height: 2rem;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+}
+.meal-number.header {
+  font-weight: 500;
+  font-size: 1.05rem;
+  height: 2.3rem;
+}
+
+.image-input-container {
+  display: flex;
+  height: 120px;
+  align-items: center;
+  justify-content: space-around;
+}
+.meal-image {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+}
+.meal-image-input {
+  display: none;
+}
+
+.meal-image-input-button {
+  background-color: #d0d0d0;
+  color: #000;
+  padding: 6px 12px;
+  border: 1px solid black;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+textarea.meal-number {
+  resize: vertical;
+  height: 13rem;
+  border: 1px solid #d0d0d0;
+  font-size: 0.9rem;
+}
+div {
+  border: 1px solid #d0d0d0;
+}
+.meal-number:focus {
+  border-color: #797979;
+  border-width: 2px;
+  outline: none;
+}
+button {
+  background-color: #d0d0d0;
+  color: #000;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+}
+button.submit {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  transform: scale(1.5);
+  margin: 30px;
+}
+button.submit:hover {
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+}
+button#save {
+  color: #333;
+  background-color: rgb(210, 210, 210);
+  border: 0.1px solid #333;
+}
+button#clear {
+  background-color: #d11a2a;
+}
+
+.highlightInput {
+  background-color: #e0e0e0;
+}
+input,
+textarea {
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0;
+}
+@media (max-width: 600px) {
+  .meal-order {
+    width: 100%;
+  }
+  .meal-number {
+    width: calc(100% / 3);
+  }
+  .flex-order {
+    order: 1;
+  }
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>W2UI Demo: grid/13</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://rawgit.com/vitmalina/w2ui/master/dist/w2ui.min.css"
+    />
+  </head>
+  <body>
+    <div id="grid" style="width: 800px; height: 400px"></div>
+
+    <script type="module">
+      import { w2grid } from "https://rawgit.com/vitmalina/w2ui/master/dist/w2ui.es6.min.js";
+
+      let grid = new w2grid({
+        name: "grid",
+        box: "#grid",
+        searches: [
+          { field: "lname", text: "Last Name", type: "text" },
+          { field: "fname", text: "First Name", type: "text" },
+          { field: "email", text: "Email", type: "text" },
+        ],
+        show: { footer: true },
+        sortData: [{ field: "recid", direction: "asc" }],
+        columnGroups: [
+          { text: "Pranzo", span: 2 },
+          { text: "Cena", span: 2 },
+        ],
+        columns: [
+          {
+            field: "lname",
+            text: "Nome",
+            size: "30%",
+          },
+          {
+            field: "fname",
+            text: "Quantita",
+            size: "30%",
+          },
+          {
+            field: "lname",
+            text: "Last Name",
+            size: "30%",
+          },
+          {
+            field: "fname",
+            text: "First Name",
+            size: "30%",
+          },
+        ],
+        records: [
+          {
+            recid: 1,
+            fname: "Jane",
+            lname: "Doe",
+            email: "jdoe@gmail.com",
+            sdate: "4/3/2012",
+            edate: "12/3/2012",
+          },
+          {
+            recid: 2,
+            fname: "Stuart",
+            lname: "Motzart",
+            email: "jdoe@gmail.com",
+            sdate: "4/3/2012",
+            edate: "11/3/2012",
+          },
+          {
+            recid: 3,
+            fname: "Jin",
+            lname: "Franson",
+            email: "peter@gmail.com",
+            sdate: "4/3/2012",
+            edate: "4/3/2012",
+          },
+        ],
+      });
+    </script>
+  </body>
+</html>

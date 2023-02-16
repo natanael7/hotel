@@ -1,0 +1,61 @@
+----- FRONT-END -----
+
+-- ORDER PAGE --
+add alergens/"other" functionality --- DONE
+add thank you page & error page --- DONE
+add order summary functionality
+
+-- DASHBOARD --
+add actual menu functionality --- NOT NEEEDED
+add copy actual menu functionality --- NOT NEEDED
+add "add image functionality" --- DONE
+
+
+----- API -----
+
+-- MENU AND ARTICLE MANAGEMENT --
+save -> push data to save  --- DONE
+send -> push data to global  --- DONE
+getSaved -> get data from save --- DONE
+getSent -> get data from global --- DONE
+update menu
+
+-- FOOD ORDERING --
+sendOrder -> push data to orders  --- DONE
+
+-- ORDER MANAGEMENT --
+seeOrders -> get data from orders --- DONE
+generateReport -> get data from orders
+changeOrder -> update orders --- DONE
+deleteOrder --- DONE
+
+-- AUDIT TRAIL --
+every transaction will push a new object in the audit trail 
+{
+  timestamp,
+  action,
+  parameters,
+  ip,
+  fingerprint
+}
+
+
+-- MICRO TASKS --
+dashboard -> form validation on sending menu
+update handle error and imporve client-server communication
+expect to recieve a non-json response on client
+create a backup table for deleted items
+update refresh function
+create master for grid pranzo and grid cena, and put them in an array or object
+summary -> add date and hour generated
+
+-- UI BUGS --
+dashboard -> flex-order for mobile
+orders
+
+-- CODE REFACTORING --
+create a separate file that will export the main classes
+create a separate master file for master functions
+create a separate configuration json file 
+refactor routes to be robust + test for invalid requests
+use close guards
