@@ -1,128 +1,3 @@
-const menu = {
-  pranzo: {
-    primo: {
-      options: [
-        {
-          title: "Cannelloni al profumo di mare",
-          description:
-            "pasta ripiena di pesce e aromi marini, condita con salsa di pomodoro e besciamella.",
-          image: "img/cannelloni al profumo di mare.avif",
-        },
-        {
-          title: "Rigatoni alla amatriciana",
-          description:
-            "pasta con salsa di pomodoro, guanciale, peperoncino e pecorino romano.",
-          image: "img/rigatoni alla amatriciana.jpeg",
-        },
-        {
-          title: "Pasta al pomodoro",
-          description:
-            "pasta semplice condita con salsa di pomodoro fresco e basilico.",
-          image: "img/pasta al pomodoro.webp",
-        },
-      ],
-    },
-    secondo: {
-      options: [
-        {
-          title: "Scaloppine di polo al limone",
-          description:
-            "fettine di pollo cotte al limone e servite con riso o contorno a scelta.",
-          image: "img/scaloppine di polo al limone.jpeg",
-        },
-        {
-          title: "Filetto di sgombro al pane profumato",
-          description:
-            "filetti di sgombro panati e cotti al forno, serviti con insalata e patate.",
-          image: "img/filetto di sgombro al pane profumato.jpeg",
-        },
-        {
-          title: "Insalata caprese",
-          description:
-            "un piatto freddo a base di pomodorini, mozzarella e basilico, condito con olio d'oliva e sale.",
-          image: "img/insalata caprese.jpeg",
-        },
-      ],
-    },
-  },
-  cena: {
-    primo: {
-      options: [
-        {
-          title: "Minestra di verdure",
-          description:
-            "una zuppa calda a base di verdure miste, come carote, patate, zucchine e fagioli.",
-          image: "img/minestra di verdure.jpeg",
-        },
-        {
-          title: "Spaghetti aglio olio e peperoncino",
-          description:
-            "pasta condita con olio d'oliva, aglio, peperoncino e prezzemolo.",
-          image: "img/spaghetti aglio olio e peperoncino.jpeg",
-        },
-        {
-          title: "Pasta al pomodoro",
-          description:
-            "pasta semplice condita con salsa di pomodoro fresco e basilico.",
-          image: "img/pasta al pomodoro.webp",
-        },
-      ],
-    },
-    secondo: {
-      options: [
-        {
-          title: "Vitel tone",
-          description:
-            "fettine di vitello cotte al vino bianco e servite con salsa al rafano e contorno a scelta.",
-          image: "img/vitel tone.jpeg",
-        },
-        {
-          title: "Filetto di orata ai pomodorini bicolore",
-          description:
-            "filetti di orata cotti con pomodorini colorati e aromi, serviti con riso o contorno a scelta.",
-          image: "img/filetto di orata ai pomodorini bicolore.jpeg",
-        },
-        {
-          title: "Insalata all'avocado",
-          description:
-            "un piatto freddo a base di avocado, pomodorini, cipolla rossa e condito con olio d'oliva e limone.",
-          image: "img/insalata all'avocado.webp",
-        },
-      ],
-    },
-  },
-};
-const summary = {
-  order: {
-    pranzo: {
-      primo: {
-        options: [82, 45, 47],
-        allergeni:
-          "\n2x pasta con pesto per celiaco\n\n1x risotto con panna senza lattosio\n2x canneloni con tonno per celiaco\n1x pasta con tonno vegano\n1x pasta con pesto senza lattosio\n1x risotto con panna \n2x canneloni con pesto \n2x pasta con pomodoro \n1x canneloni con tonno \n1x pasta con panna vegano\n1x pasta con tonno \n2x pasta con pesto per celiaco\n1x risotto con pesto \n2x canneloni con pesto vegano\n\n2x pasta con pesto per celiaco\n\n1x risotto con tonno \n1x pasta con pesto vegano\n2x risotto con pesto senza lattosio\n1x risotto con panna \n1x risotto con panna \n3x canneloni con panna per celiaco\n2x canneloni con pomodoro per celiaco\n2x pasta con pomodoro \n1x pasta con pomodoro \n3x canneloni con panna \n1x canneloni con pesto \n2x canneloni con tonno \n3x canneloni con panna senza lattosio\n1x canneloni con tonno \n3x pasta con tonno \n2x pasta con pomodoro senza lattosio\n\nundefined\nundefined\n1x risotto con pesto \n2x risotto con pesto \n4x risotto con pomodoro vegano\n1x pasta con panna senza lattosio\n\n1x risotto con pomodoro \n2x pasta con panna \n1x canneloni con pesto \n3x canneloni con panna \n3x canneloni con pesto per celiaco\n2x pasta con panna \n2x canneloni con panna senza lattosio\n1x canneloni con pomodoro \n1x risotto con panna \n1x risotto con tonno \n1x pasta con pomodoro \n2x pasta con pomodoro \n1x canneloni con pesto \n2x pasta con pomodoro \n",
-      },
-      secondo: {
-        options: [83, 58, 38],
-        allergeni:
-          "3x risotto con panna senza lattosio\n1x pasta con pesto \n1x canneloni con tonno senza lattosio\n\n2x risotto con tonno senza lattosio\n\n1x canneloni con panna vegano\n1x pasta con pesto vegano\n1x canneloni con pesto \n1x risotto con pesto per celiaco\n1x canneloni con panna senza lattosio\n\n\n3x pasta con pomodoro vegano\n3x canneloni con pomodoro per celiaco\n1x pasta con tonno vegano\n1x pasta con pomodoro per celiaco\n1x risotto con pomodoro \n2x canneloni con panna vegano\n2x canneloni con pomodoro \n2x canneloni con tonno \n\n1x canneloni con panna senza lattosio\n1x canneloni con pesto \n2x canneloni con panna \n2x risotto con pesto per celiaco\n3x pasta con panna \n2x pasta con panna \n3x canneloni con tonno \nundefined\nundefined\n2x pasta con pomodoro \n2x risotto con tonno per celiaco\n1x risotto con pomodoro senza lattosio\n2x pasta con panna \n1x pasta con pomodoro \n1x pasta con pomodoro \n1x risotto con pesto senza lattosio\n4x risotto con pesto \n1x pasta con tonno per celiaco\n3x risotto con tonno senza lattosio\n1x pasta con pesto \n3x canneloni con tonno \n1x risotto con tonno \n1x canneloni con panna vegano\n1x risotto con tonno vegano\n3x risotto con pesto per celiaco\n1x pasta con pomodoro \n1x risotto con panna per celiaco\n2x pasta con tonno \n1x risotto con pesto \n2x risotto con pesto senza lattosio\n2x pasta con pesto \n",
-      },
-    },
-    cena: {
-      primo: {
-        options: [99, 30, 48],
-        allergeni:
-          "1x pasta con panna vegano\n3x pasta con panna vegano\n1x risotto con pesto per celiaco\n1x canneloni con tonno \n2x canneloni con tonno \n1x risotto con tonno \n2x canneloni con panna senza lattosio\n3x canneloni con pomodoro vegano\n1x canneloni con pesto \n1x risotto con pomodoro vegano\n3x canneloni con pomodoro senza lattosio\n1x pasta con pomodoro \n\n3x risotto con pomodoro vegano\n2x canneloni con pomodoro \n\n3x pasta con panna per celiaco\n1x pasta con pesto \n1x pasta con panna \n3x pasta con pesto \n5x pasta con tonno vegano\n1x risotto con pomodoro senza lattosio\n3x pasta con pomodoro \n1x canneloni con panna \n2x pasta con pesto \n4x risotto con pomodoro senza lattosio\n1x canneloni con panna \n\n1x pasta con tonno \n1x canneloni con pomodoro senza lattosio\n2x pasta con tonno \n1x canneloni con pesto \n1x canneloni con pomodoro per celiaco\n2x pasta con tonno \n1x risotto con pomodoro per celiaco\n1x canneloni con pesto senza lattosio\nundefined\nundefined\n1x pasta con pesto \n1x risotto con panna \n3x pasta con pesto \n1x pasta con tonno per celiaco\n4x risotto con pesto vegano\n1x canneloni con panna vegano\n1x canneloni con panna \n1x canneloni con tonno senza lattosio\n1x canneloni con panna vegano\n1x canneloni con panna vegano\n1x canneloni con pesto \n1x canneloni con tonno vegano\n1x canneloni con pomodoro \n\n\n2x risotto con pomodoro \n3x risotto con pomodoro senza lattosio\n1x risotto con tonno \n3x risotto con tonno \n",
-      },
-      secondo: {
-        options: [62, 54, 61],
-        allergeni:
-          "\n2x pasta con panna \n2x pasta con tonno \n1x risotto con pesto \n3x risotto con tonno senza lattosio\n2x pasta con pesto per celiaco\n1x canneloni con panna vegano\n2x pasta con pesto \n1x risotto con pomodoro \n\n1x pasta con panna \n1x canneloni con panna senza lattosio\n3x canneloni con pesto per celiaco\n1x canneloni con pesto senza lattosio\n1x pasta con pomodoro \n\n2x risotto con pomodoro vegano\n1x risotto con pesto \n\n3x canneloni con panna \n1x pasta con panna \n\n2x canneloni con tonno senza lattosio\n1x pasta con pomodoro senza lattosio\n1x pasta con tonno \n1x pasta con pomodoro vegano\n3x pasta con tonno \n2x canneloni con pesto \n3x canneloni con panna vegano\n1x risotto con panna \n1x pasta con panna vegano\n1x pasta con panna senza lattosio\n1x canneloni con panna \n1x pasta con panna senza lattosio\n\nundefined\nundefined\n\n2x risotto con pesto \n2x pasta con panna \n1x pasta con tonno \n3x canneloni con pomodoro senza lattosio\n1x canneloni con pesto vegano\n1x canneloni con panna \n1x canneloni con tonno \n1x canneloni con pesto per celiaco\n1x risotto con panna \n4x risotto con tonno senza lattosio\n2x pasta con panna vegano\n1x pasta con pesto vegano\n1x canneloni con pomodoro \n\n3x canneloni con pesto \n2x canneloni con panna per celiaco\n2x canneloni con pesto vegano\n1x canneloni con tonno \n1x risotto con pomodoro \n1x canneloni con pesto senza lattosio\n",
-      },
-    },
-  },
-};
-const summaryUrl = "http://127.0.0.1:3000/api/get/order/all/summary";
-const menuUrl = "http://127.0.0.1:3000/api/get/menu/current";
-
 const capitalize = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 const removeDoubleNewLine = (text) => text.replace(/\n+/g, "\n");
 function createAndAppendAllergeni(name, parent) {
@@ -248,10 +123,10 @@ function parseSummary(menu, summary) {
   }
 }
 async function main() {
-  const menuRes = await fetch(menuUrl);
+  const menuRes = await fetch(url.getMenuCurrent);
   const menu = await menuRes.json();
 
-  const summaryRes = await fetch(summaryUrl);
+  const summaryRes = await fetch(url.getOrderAllSummary);
   const summary = await summaryRes.json();
   parseSummary(menu, summary);
 }

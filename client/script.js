@@ -1,94 +1,3 @@
-// const data = {
-//   "pranzo": {
-//     "primo": [
-//       {
-//         "title": "Bistecca di Black Angus",
-//         "image": "img/img/black-angus-steak.jpg",
-//         "description":
-//           "Bistecca succosa e saporita realizzata con carne di Black Angus, cotta a piacere.",
-//       },
-//       {
-//         "title": "Pasta",
-//         "image": "img/img/pasta.webp",
-//         "description":
-//           "Scelta tra spaghetti, fettuccine o penne con salsa di pomodoro o salsa Alfredo.",
-//       },
-//       {
-//         "title": "Tonno alla griglia",
-//         "image": "img/img/tuna-steak.jpg",
-//         "description":
-//           "Tonno croccante con semi di sesamo servito con una glassa di soia e zenzero.",
-//       }
-//     ]
-//     "secondo": [
-//       {
-//         "title": "Gnocchi cinesi",
-//         "image": "img/img/dumplings.jpg",
-//         "description":
-//           "Gnocchi cinesi cotti al vapore o in padella farciti con carne o verdure.",
-//       },
-//       {
-//         "title": "Pollo",
-//         "image": "img/img/chicken.jpg",
-//         "description":
-//           "Pollo alla griglia o fritto servito con una scelta di salse per accompagnare.",
-//       },
-//       {
-//         "title": "Salmone",
-//         "image": "img/img/salmon.jpeg",
-//         "description":
-//           "Salmone alla griglia o al forno servito con una scelta di salse o condimenti.",
-//       }
-//     ]
-//   }
-//   "cena": {
-//     "primo": [
-//       {
-//         "title": "Patate Dolci",
-//         "image": "img/img/sweet-potato.jpeg",
-//         "description":
-//           "Patate dolci arrosto con burro, zucchero di canna e noci.",
-//       },
-//       {
-//         "title": "Enchiladas",
-//         "image": "img/img/enchilladas.webp",
-//         "description":
-//           "Tortillas di mais farcite con carne o verdure e condite con salsa di enchilada e formaggio.",
-//       },
-//       {
-//         "title": "Tacos",
-//         "image": "img/img/tacos.jpeg",
-//         "description":
-//           "Tacos morbidi o croccanti farciti con carne o verdure e conditi con salsa e formaggio.",
-//       }
-//     ]
-//     "secondo": [
-//       {
-//         "title": "Tapas",
-//         "image": "img/img/tapas.jpg",
-//         "description":
-//           "Assortimento di piccole portate spagnole come croquetas, tortilla e chorizo.",
-//       },
-//       {
-//         "title": "Quesadilla",
-//         "image": "img/img/quesadilla.jpg",
-//         "description":
-//           "Tortilla di farina farcita con formaggio e carne o verdure, grigliata e servita con salsa e sour cream",
-//       },
-//       {
-//         "title": "Paella",
-//         "image": "img/img/paela.jpg",
-//         "description":
-//           "Traditional Spanish rice dish made with saffron, seafood, chicken, and vegetables.",
-//       }
-//     ]
-//   }
-// }
-const baseUrl = "http://127.0.0.1:3000";
-// const baseUrl =
-//   "https://72f0-2a02-2f0c-5811-4000-8da4-bafe-2368-e8fb.eu.ngrok.io";
-const url = baseUrl + "/api/get/menu/last";
-const urlPostOrder = baseUrl + "/api/post/order";
 const urlThankYou = "/thank-you.html";
 const urlProblem = "/problem.html";
 const setId = (element, id) => element.setAttribute("id", id);
@@ -99,7 +8,7 @@ const makeNotNullInputsGrey = (input) => {
 };
 
 async function fetchData() {
-  const response = await fetch(url, {
+  const response = await fetch(url.getMenuLast, {
     method: "GET",
     headers: {
       "ngrok-skip-browser-warning": "true",
@@ -291,7 +200,7 @@ function addOrderFunctionality() {
       body: JSON.stringify(order),
     };
     try {
-      const res = await fetch(urlPostOrder, options);
+      const res = await fetch(url.postOrder, options);
       if (res.ok) window.location.href = urlThankYou;
       else window.location.href = urlProblem;
     } catch (err) {
@@ -309,7 +218,7 @@ async function main() {
   preventManualChangeInputs();
   addOrderFunctionality();
   generateDummyData();
-  document.querySelector(".order-button").click();
+  // document.querySelector(".order-button").click();
 }
 
 main();
@@ -332,7 +241,8 @@ function generateDummyData() {
     return result;
   };
   const generateAllergiesData = (maxPeople) => {
-    const allergyPeople = Math.random() < PROBABILITY ? random(0, maxPeople) : 0;
+    const allergyPeople =
+      Math.random() < PROBABILITY ? random(0, maxPeople) : 0;
 
     const what = ["pasta", "risotto", "canneloni"];
     const withWhat = ["con pomodoro", "con pesto", "con tonno", "con panna"];

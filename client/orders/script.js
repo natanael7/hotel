@@ -1,9 +1,5 @@
 const ROOM_IS_EDITABLE = false;
 
-const deleteUrl = "http://127.0.0.1:3000/api/delete/order";
-const updateUrl = "http://127.0.0.1:3000/api/edit/order";
-const dataUrl = "http://127.0.0.1:3000/api/get/order/all/plain";
-const menuUrl = "http://127.0.0.1:3000/api/get/menu/all";
 import {
   w2layout,
   w2sidebar,
@@ -28,7 +24,7 @@ class Order {
       },
       body: JSON.stringify(this),
     };
-    const res = await fetch(deleteUrl, options);
+    const res = await fetch(url.deleteOrder, options);
     const json = await res.json();
     console.log(json);
   }
@@ -51,8 +47,8 @@ async function main() {
     gridPranzo.refresh();
   };
   async function getData() {
-    const menus = await (await fetch(menuUrl)).json();
-    const orders = await (await fetch(dataUrl)).json();
+    const menus = await (await fetch(url.getMenuAll)).json();
+    const orders = await (await fetch(url.getOrderAllPlain)).json();
     return { menus, orders };
   }
   const selectCorrectMenu = (menus) => menus[menus.length - 1];
@@ -269,7 +265,7 @@ async function main() {
             },
             body: JSON.stringify(this.record),
           };
-          await fetch(updateUrl, options);
+          await fetch(url.updateOrder, options);
           gridPranzo.set(this.recid, this.record);
           gridPranzo.selectNone();
           gridCena.set(this.recid, this.record);

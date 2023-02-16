@@ -1,5 +1,6 @@
 const REQUIRED = { image: true, title: true, description: true };
 const GLOBAL_PREFIX = "../upload/";
+
 class Food {
   constructor({ title = null, description = null, image = null }) {
     this.title = title;
@@ -128,8 +129,8 @@ const uploadFiles = async (files) => {
     method: "POST",
     body: formData,
   };
-  const url = "http://127.0.0.1:3000/api/post/files";
-  const res = await (await fetch(url, options)).json();
+
+  const res = await (await fetch(url.uploadFiles, options)).json();
   return res;
 };
 function clearData() {
@@ -162,7 +163,6 @@ async function saveData() {
 
   menu.applyIDs(fileIDs);
 
-  const url = "http://127.0.0.1:3000/api/post/menu-local";
   const options = {
     method: "POST",
     headers: {
@@ -171,11 +171,10 @@ async function saveData() {
     body: JSON.stringify(menu),
   };
 
-  fetch(url, options);
+  fetch(url.postLocalMenu, options);
 }
 async function getAndWriteSavedData() {
-  const url = "http://127.0.0.1:3000/api/get/menu-local/last";
-  const res = await fetch(url);
+  const res = await fetch(url.getLocalMenuLast);
   const data = await res.json();
   const menu = new Menu(data);
 

@@ -1,6 +1,6 @@
 import { plain, unplain } from "./plain.js";
 
-export { plainOrderTemplate } from "../functions/templates.js";
+import { plainOrderTemplate } from "../functions/templates.js";
 
 export default (data = []) => {
   // close guard for non-array data

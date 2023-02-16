@@ -1,3 +1,4 @@
+import { getDateNow, getTimeNow } from "../functions/time.js";
 class Food {
   constructor({ title = "", description = "", image = "" }) {
     this.title = title;
