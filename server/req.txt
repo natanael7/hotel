@@ -54,7 +54,6 @@ dashboard -> flex-order for mobile
 orders
 
 -- CODE REFACTORING --
-create a separate file that will export the main classes
 create a separate master file for master functions
 create a separate configuration json file 
 refactor routes to be robust + test for invalid requests
