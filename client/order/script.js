@@ -10,9 +10,6 @@ const makeNotNullInputsGrey = (input) => {
 async function fetchData() {
   const response = await fetch(url.getMenuLast, {
     method: "GET",
-    headers: {
-      "ngrok-skip-browser-warning": "true",
-    },
   });
   const { pranzo, cena, _id: menuId } = await response.json();
   return { pranzo, cena, menuId };
@@ -20,7 +17,6 @@ async function fetchData() {
 
 function generateMeals(data) {
   const menu = document.querySelector(".menu");
-  console.log(data);
   setId(menu, data.menuId);
   for (const mealType in data) {
     if (mealType == "menuId") return;
@@ -31,7 +27,7 @@ function generateMeals(data) {
     const mealTypeTitle = document.createElement("h2");
     mealTypeTitle.classList.add("menu__subtitle");
     mealTypeTitle.textContent =
-      mealType.charAt(0).toUpperCase() + mealType.slice(1);
+      mealType.charAt(0).toUpperCase() + mealType.slice();
     mealTypeSection.appendChild(mealTypeTitle);
 
     for (const mealTime in data[mealType]) {

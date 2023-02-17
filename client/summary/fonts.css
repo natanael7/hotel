@@ -1,35 +1,35 @@
 @font-face {
   font-family: "Onest";
-  src: url("../fonts/OnestThin602-hint.woff") format("woff");
+  src: url("/src/fonts/OnestThin602-hint.woff") format("woff");
   font-weight: 200;
 }
 @font-face {
   font-family: "Onest";
-  src: url("../fonts/OnestLight1602-hint.woff") format("woff");
+  src: url("/src/fonts/OnestLight1602-hint.woff") format("woff");
   font-weight: 300;
 }
 @font-face {
   font-family: "Onest";
-  src: url("../fonts/OnestRegular1602-hint.woff") format("woff");
+  src: url("/src/fonts/OnestRegular1602-hint.woff") format("woff");
   font-weight: 400;
 }
 @font-face {
   font-family: "Onest";
-  src: url("../fonts/OnestMedium1602-hint.woff") format("woff");
+  src: url("/src/fonts/OnestMedium1602-hint.woff") format("woff");
   font-weight: 500;
 }
 @font-face {
   font-family: "Onest";
-  src: url("../fonts/OnestBold1602-hint.woff") format("woff");
+  src: url("/src/fonts/OnestBold1602-hint.woff") format("woff");
   font-weight: 600;
 }
 @font-face {
   font-family: "Onest";
-  src: url("../fonts/OnestExtraBold1602-hint.woff") format("woff");
+  src: url("/src/fonts/OnestExtraBold1602-hint.woff") format("woff");
   font-weight: 700;
 }
 @font-face {
   font-family: "Onest";
-  src: url("../fonts/OnestBlack1602-hint.woff") format("woff");
+  src: url("/src/fonts/OnestBlack1602-hint.woff") format("woff");
   font-weight: 800;
 }

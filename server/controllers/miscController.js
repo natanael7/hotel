@@ -41,7 +41,7 @@ async function filesUpload(req, res) {
       const extension = nameArr[nameArr.length - 1];
       return `${newName}.${extension}`;
     };
-
+    // console.log(req.files);
     const files = req.files;
 
     if (files == null || files == undefined)

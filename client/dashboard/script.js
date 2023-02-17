@@ -120,7 +120,7 @@ const getDataFromInputs = () => {
   return data;
 };
 
-const uploadFiles = async (files) => {
+const uploadFilesToServer = async (files) => {
   if (files.length == 0) return [];
   const formData = new FormData();
   files.map((file) => formData.append("images", file));
@@ -159,7 +159,7 @@ async function saveData() {
 
   const files = menu.files();
 
-  const fileIDs = await uploadFiles(files);
+  const fileIDs = await uploadFilesToServer(files);
 
   menu.applyIDs(fileIDs);
 
