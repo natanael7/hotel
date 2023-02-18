@@ -1,4 +1,9 @@
+// -----   CONFIG   -----
+const THANK_YOU_URL = "/order/thank-you.html";
+const PROBLEM_URL = "/order/problem.html";
+
 const baseUrl = "http://127.0.0.1:3000";
+
 const url = {
   uploadFiles: baseUrl + "/api/post/files",
   getLocalMenuLast: baseUrl + "/api/get/menu-local/last",
@@ -13,8 +18,11 @@ const url = {
   getMenuCurrent: baseUrl + "/api/get/menu/current",
 };
 
-async function fetchUrl(url, options) {
+async function fetchUrl(url, options, returnResponse = false) {
   const res = await fetch(url, options);
+
+  if (returnResponse) return res;
+
   const json = await res.json();
   return json;
 }
@@ -29,7 +37,8 @@ const postLocalMenu = async (options) =>
 
 const getMenuLast = async (options) => await fetchUrl(url.getMenuLast, options);
 
-const postOrder = async (options) => await fetchUrl(url.postOrder, options);
+const postOrder = async (options, res) =>
+  await fetchUrl(url.postOrder, options, res);
 
 const deleteOrder = async (options) => await fetchUrl(url.deleteOrder, options);
 

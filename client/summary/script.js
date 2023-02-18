@@ -78,12 +78,12 @@ function createAndAppendType(name, qt, parent) {
 function parseSummary(menu, summary) {
   const pairs = {
     pranzo: {
-      primo: { options: [], allergeni: "" },
-      secondo: { options: [], allergeni: "" },
+      primo: { options: [], allergies: "" },
+      secondo: { options: [], allergies: "" },
     },
     cena: {
-      primo: { options: [], allergeni: "" },
-      secondo: { options: [], allergeni: "" },
+      primo: { options: [], allergies: "" },
+      secondo: { options: [], allergies: "" },
     },
   };
   for (const time in pairs) {
@@ -115,7 +115,7 @@ function parseSummary(menu, summary) {
     for (const type in pairs[time]) {
       createAndAppendType(type, "", parent);
       createAndAppendAllergeni(
-        removeDoubleNewLine(summary.order[time][type].allergeni),
+        removeDoubleNewLine(summary.order[time][type].allergies),
         parent
       );
     }

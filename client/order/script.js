@@ -1,120 +1,199 @@
-const urlThankYou = "/thank-you.html";
-const urlProblem = "/problem.html";
+const ALLERGIES_PLACEHOLDER =
+  "Inserisci eventuali allergeni o preferenze sugli ingredienti, per esempio:\n1x Pasta con pomodoro per celiaco\n2x Pasta con pesto";
+
+const blankOrderTemplate = {
+  pranzo: {
+    primo: { options: [], allergies: null },
+    secondo: { options: [], allergies: null },
+  },
+  cena: {
+    primo: { options: [], allergies: null },
+    secondo: { options: [], allergies: null },
+  },
+};
+const loop = (callback) => {
+  const time = ["pranzo", "cena"];
+  const type = ["primo", "secondo"];
+  time.map((tm) => {
+    type.map((tp) => {
+      callback(tm, tp);
+    });
+  });
+};
+
+const capitalize = (string) => string.charAt(0).toUpperCase() + string.slice(1);
+
 const setId = (element, id) => element.setAttribute("id", id);
 
 const makeNotNullInputsGrey = (input) => {
   if (input.value > 0) input.classList.add("highlight-input");
   else input.classList.remove("highlight-input");
 };
+const quantitySelector = (time, type, index) => {
+  return `#${time}-${type}-quantity-${index}`;
+};
+const allergiesSelector = (time, type) => {
+  return `#${time}-${type}-allergies`;
+};
 
-async function fetchData() {
-  const response = await fetch(url.getMenuLast, {
-    method: "GET",
-  });
-  const { pranzo, cena, _id: menuId } = await response.json();
-  return { pranzo, cena, menuId };
-}
+// -----  GENERATE MEALS FUNCTIONS  -----
+const createTypeSection = (type) => {
+  const element = document.createElement("section");
+  element.classList.add(`menu__meal`);
+  element.classList.add(`menu__${type}`);
+  return element;
+};
+const createTypeTitle = (type) => {
+  const element = document.createElement("h2");
+  element.classList.add("menu__subtitle");
+  element.textContent = capitalize(type);
+  return element;
+};
+
+const createTimeSection = (type, time) => {
+  const element = document.createElement("section");
+  element.classList.add(`menu__${type}-${time}`);
+  return element;
+};
+
+const createTimeTitle = (time) => {
+  const element = document.createElement("h3");
+  element.classList.add("menu__subsubtitle");
+  element.textContent = capitalize(time);
+  return element;
+};
+
+const createMenuList = () => {
+  const element = document.createElement("ul");
+  element.classList.add("menu__list");
+  return element;
+};
+
+const createMeal = (item, index, type, time, menuList) => {
+  const id = type + "_" + time + "_" + item.title.replace(/ /g, "-");
+  const menuItem = document.createElement("li");
+  menuItem.classList.add("menu__item");
+  menuItem.id = id;
+
+  const menuItemTitle = document.createElement("h4");
+  menuItemTitle.classList.add("menu__item-title");
+  menuItemTitle.textContent = item.title;
+  menuItem.appendChild(menuItemTitle);
+
+  const menuItemWrapper = document.createElement("div");
+  menuItemWrapper.classList.add("menu__item-wrapper");
+
+  const menuItemImage = document.createElement("img");
+  menuItemImage.classList.add("menu__item-image");
+  menuItemImage.src = item.image;
+  menuItemImage.alt = item.title;
+  menuItemWrapper.appendChild(menuItemImage);
+
+  const menuItemDescription = document.createElement("p");
+  menuItemDescription.classList.add("menu__item-description");
+  menuItemDescription.textContent = item.description;
+  menuItemWrapper.appendChild(menuItemDescription);
+
+  menuItem.appendChild(menuItemWrapper);
+
+  const quantityDiv = document.createElement("div");
+  quantityDiv.classList.add("menu__item-quantity");
+  const minusBtn = document.createElement("button");
+  minusBtn.classList.add(
+    "menu__item-quantity-minus",
+    "menu__item-quantity-change"
+  );
+  minusBtn.innerHTML = "-";
+  quantityDiv.appendChild(minusBtn);
+  const input = document.createElement("input");
+  input.classList.add("menu__item-quantity-input");
+  input.setAttribute("type", "number");
+  input.setAttribute("min", "0");
+  input.setAttribute("value", "0");
+  setId(input, `${type}-${time}-quantity-${index}`);
+  quantityDiv.appendChild(input);
+  const plusBtn = document.createElement("button");
+  plusBtn.classList.add(
+    "menu__item-quantity-plus",
+    "menu__item-quantity-change"
+  );
+  plusBtn.innerHTML = "+";
+
+  quantityDiv.appendChild(plusBtn);
+
+  menuItem.appendChild(quantityDiv);
+
+  menuList.appendChild(menuItem);
+};
+const createAllergens = () => {
+  const element = document.createElement("textarea");
+  element.classList.add("menu__allergen-input");
+  element.placeholder = ALLERGIES_PLACEHOLDER;
+  return element;
+};
 
 function generateMeals(data) {
   const menu = document.querySelector(".menu");
-  setId(menu, data.menuId);
-  for (const mealType in data) {
-    if (mealType == "menuId") return;
-    const mealTypeSection = document.createElement("section");
-    mealTypeSection.classList.add(`menu__meal`);
-    mealTypeSection.classList.add(`menu__${mealType}`);
+  const menuId = data._id;
 
-    const mealTypeTitle = document.createElement("h2");
-    mealTypeTitle.classList.add("menu__subtitle");
-    mealTypeTitle.textContent =
-      mealType.charAt(0).toUpperCase() + mealType.slice();
-    mealTypeSection.appendChild(mealTypeTitle);
+  // Set the id for the menu container that further will be used to post the orders
+  // The orders are requiered to have a menuId to be able to identify what was ordered
+  setId(menu, menuId);
 
-    for (const mealTime in data[mealType]) {
-      const mealTimeSection = document.createElement("section");
-      mealTimeSection.classList.add(`menu__${mealType}-${mealTime}`);
+  for (const type in blankOrderTemplate) {
+    const typeSection = createTypeSection(type);
+    const typeTitle = createTypeTitle(type);
 
-      const mealTimeTitle = document.createElement("h3");
-      mealTimeTitle.classList.add("menu__subsubtitle");
-      mealTimeTitle.textContent =
-        mealTime.charAt(0).toUpperCase() + mealTime.slice(1);
-      mealTimeSection.appendChild(mealTimeTitle);
+    typeSection.appendChild(typeTitle);
 
-      const menuList = document.createElement("ul");
-      menuList.classList.add("menu__list");
+    for (const time in blankOrderTemplate[type]) {
+      const timeSection = createTimeSection(type, time);
+      const timeTitle = createTimeTitle(time);
 
-      data[mealType][mealTime].options.forEach((item, index) => {
-        const id =
-          mealType + "_" + mealTime + "_" + item.title.replace(/ /g, "-");
-        const menuItem = document.createElement("li");
-        menuItem.classList.add("menu__item");
-        menuItem.id = id;
+      timeSection.appendChild(timeTitle);
 
-        const menuItemTitle = document.createElement("h4");
-        menuItemTitle.classList.add("menu__item-title");
-        menuItemTitle.textContent = item.title;
-        menuItem.appendChild(menuItemTitle);
+      const menuList = createMenuList();
 
-        const menuItemWrapper = document.createElement("div");
-        menuItemWrapper.classList.add("menu__item-wrapper");
+      data[type][time].options.map((el, i) =>
+        createMeal(el, i, type, time, menuList)
+      );
 
-        const menuItemImage = document.createElement("img");
-        menuItemImage.classList.add("menu__item-image");
-        menuItemImage.src = item.image;
-        menuItemImage.alt = item.title;
-        menuItemWrapper.appendChild(menuItemImage);
+      const allergensElement = createAllergens();
+      setId(allergensElement, `${type}-${time}-allergies`);
 
-        const menuItemDescription = document.createElement("p");
-        menuItemDescription.classList.add("menu__item-description");
-        menuItemDescription.textContent = item.description;
-        menuItemWrapper.appendChild(menuItemDescription);
+      timeSection.appendChild(menuList);
+      timeSection.appendChild(allergensElement);
 
-        menuItem.appendChild(menuItemWrapper);
-
-        const quantityDiv = document.createElement("div");
-        quantityDiv.classList.add("menu__item-quantity");
-        const minusBtn = document.createElement("button");
-        minusBtn.classList.add(
-          "menu__item-quantity-minus",
-          "menu__item-quantity-change"
-        );
-        minusBtn.innerHTML = "-";
-        quantityDiv.appendChild(minusBtn);
-        const input = document.createElement("input");
-        input.classList.add("menu__item-quantity-input");
-        input.setAttribute("type", "number");
-        input.setAttribute("min", "0");
-        input.setAttribute("value", "0");
-        setId(input, `${mealType}-${mealTime}-quantity-${index}`);
-        quantityDiv.appendChild(input);
-        const plusBtn = document.createElement("button");
-        plusBtn.classList.add(
-          "menu__item-quantity-plus",
-          "menu__item-quantity-change"
-        );
-        plusBtn.innerHTML = "+";
-
-        quantityDiv.appendChild(plusBtn);
-
-        menuItem.appendChild(quantityDiv);
-
-        menuList.appendChild(menuItem);
-      });
-
-      const allergensElement = document.createElement("textarea");
-      allergensElement.classList.add("menu__allergen-input");
-      allergensElement.placeholder =
-        "Inserisci eventuali allergeni o preferenze sugli ingredienti, per esempio:\n1x Pasta con pomodoro per celiaco\n2x Pasta con pesto";
-      setId(allergensElement, `${mealType}-${mealTime}-allergies`);
-
-      mealTimeSection.appendChild(menuList);
-      mealTimeSection.appendChild(allergensElement);
-      mealTypeSection.appendChild(mealTimeSection);
+      typeSection.appendChild(timeSection);
     }
-
-    menu.appendChild(mealTypeSection);
+    menu.appendChild(typeSection);
   }
 }
+// -----  END OF GENERATE MEALS FUNCTIONS  -----
+
+// -----  GET ORDER DATA FUNCTIONS  -----
+function getOrder() {
+  const data = {
+    order: blankOrderTemplate,
+    room: document.querySelector(".room-number-input").value,
+    menuId: document.querySelector(".menu").id,
+  };
+
+  const getDataFromOneMeal = (time, type) => {
+    for (let i = 0; i < 3; i++)
+      data.order[time][type].options.push(
+        document.querySelector(quantitySelector(time, type, i)).value
+      );
+    data.order[time][type].allergies = document.querySelector(
+      allergiesSelector(time, type)
+    ).value;
+  };
+
+  loop(getDataFromOneMeal);
+  console.log(data);
+  return data;
+}
+// -----  END OF GET ORDER DATA FUNCTIONS  -----
 function addCountingFunctionality() {
   const minusButtons = document.querySelectorAll(".menu__item-quantity-minus");
   const plusButtons = document.querySelectorAll(".menu__item-quantity-plus");
@@ -143,50 +222,14 @@ function preventManualChangeInputs() {
     })
   );
 }
-function getOrder() {
-  const generateBlankOrder = () => {
-    const obj = {};
-    mealTime.map((time) => {
-      obj[time] = {};
-      mealType.map((type) => {
-        obj[time][type] = { options: [], allergies: "" };
-      });
-    });
-    return obj;
-  };
+// -----  ORDER BUTTON FUNCTIONS  -----
 
-  const mealTime = ["pranzo", "cena"];
-  const mealType = ["primo", "secondo"];
-
-  const data = {
-    order: generateBlankOrder(),
-    room: document.querySelector(".room-number-input").value,
-    menuId: document.querySelector(".menu").id,
-  };
-
-  const quantitySelector = (time, type, index) => {
-    return `#${time}-${type}-quantity-${index}`;
-  };
-  const allergiesSelector = (time, type) => {
-    return `#${time}-${type}-allergies`;
-  };
-  mealTime.map((time) => {
-    mealType.map((type) => {
-      for (let i = 0; i < 3; i++)
-        data.order[time][type].options.push(
-          document.querySelector(quantitySelector(time, type, i)).value
-        );
-      data.order[time][type].allergies = document.querySelector(
-        allergiesSelector(time, type)
-      ).value;
-    });
-  });
-
-  return data;
-}
-function addOrderFunctionality() {
-  const onButtonClick = async () => {
-    const order = getOrder();
+const makePopUpOrderSummary = async (menu) => {
+  const data = getOrder();
+  createPopup(menu, data, pushOrderToServer);
+};
+const pushOrderToServer = async (order) => {
+  try {
     const options = {
       method: "POST",
       headers: {
@@ -195,24 +238,39 @@ function addOrderFunctionality() {
       },
       body: JSON.stringify(order),
     };
-    try {
-      const res = await fetch(url.postOrder, options);
-      if (res.ok) window.location.href = urlThankYou;
-      else window.location.href = urlProblem;
-    } catch (err) {
-      window.location.href = urlProblem;
-    }
-  };
+    const res = await postOrder(options, true);
+    if (res.ok) window.location.href = THANK_YOU_URL;
+    else window.location.href = PROBLEM_URL;
+  } catch (err) {
+    window.location.href = PROBLEM_URL;
+  }
+};
+function addOrderFunctionality(menu) {
   const orderButton = document.querySelector("button.order-button");
-  orderButton.addEventListener("click", onButtonClick);
+  orderButton.addEventListener("click", () => {
+    if (formValidation()) makePopUpOrderSummary(menu);
+  });
+}
+// -----  END OF ORDER BUTTON FUNCTIONS  -----
+function formValidation() {
+  let room = document.querySelector(".room-number-input").value;
+  if (room == "") {
+    document.querySelector(".room-number-input").style.border = "1px solid red";
+    document.querySelector(".room-number-input").style.backgroundColor =
+      "#eec4dc";
+    alert("Perfavore scrivi numero camera");
+    return false;
+  }
+  return true;
 }
 
 async function main() {
-  const data = await fetchData();
+  const data = await getMenuLast();
+
   generateMeals(data);
   addCountingFunctionality();
   preventManualChangeInputs();
-  addOrderFunctionality();
+  addOrderFunctionality(data);
   generateDummyData();
   // document.querySelector(".order-button").click();
 }
@@ -259,8 +317,8 @@ function generateDummyData() {
   };
 
   const writeData = () => {
-    mealTime.map((time) => {
-      mealType.map((type) => {
+    time.map((time) => {
+      type.map((type) => {
         order[time][type].options.map((el, index) => {
           const qtySelector = `#${time}-${type}-quantity-${index}`;
           document.querySelector(qtySelector).value = el;
@@ -274,13 +332,13 @@ function generateDummyData() {
     document.querySelector(roomSelector).value = order.room;
   };
 
-  const mealTime = ["pranzo", "cena"];
-  const mealType = ["primo", "secondo"];
+  const time = ["pranzo", "cena"];
+  const type = ["primo", "secondo"];
   const generateBlankOrder = () => {
     const obj = {};
-    mealTime.map((time) => {
+    time.map((time) => {
       obj[time] = {};
-      mealType.map((type) => {
+      type.map((type) => {
         obj[time][type] = { options: [], allergies: "" };
       });
     });
@@ -288,8 +346,8 @@ function generateDummyData() {
   };
   const order = generateBlankOrder();
 
-  mealTime.map((time) => {
-    mealType.map((type) => {
+  time.map((time) => {
+    type.map((type) => {
       order[time][type].options = generateNumbersWithSum(PERSONS);
       order[time][type].allergies = generateAllergiesData(PERSONS);
     });

@@ -26,15 +26,15 @@ const unplain = (order = {}) => {
   // secondly we loop again through the properties
   // when looping we destructure every elemeny into an array of time, type, i
   // ex: ["pranzo", "primo", "0"] -> time:"pranzo", type:"primo", i:"0"
-  // or: ["pranzo", "primo", "allergeni"] -> time:"pranzo", type:"primo", i:"allergeni"
+  // or: ["pranzo", "primo", "allergies"] -> time:"pranzo", type:"primo", i:"allergies"
   properties
     .map((el) => el.split("_"))
     .map(([time, type, i], index) => {
       if (isNaN(parseInt(i)))
-        // Handle when i = "allergeni"
-        // time:"pranzo", type:"primo", i:"allergeni" -->
-        // --> clone.order.pranzo.primo.allergeni = order.pranzo_primo_allergeni
-        clone.order[time][type].allergeni = order[properties[index]];
+        // Handle when i = "allergies"
+        // time:"pranzo", type:"primo", i:"allergies" -->
+        // --> clone.order.pranzo.primo.allergies = order.pranzo_primo_allergies
+        clone.order[time][type].allergies = order[properties[index]];
       else {
         // Handle when i = "0"
         // time:"pranzo", type:"primo", i:"0" -->
@@ -73,7 +73,7 @@ const plain = (order = {}) => {
         order[prop] = value;
       }
       // we do the same steps for the allergies but outside the options loop
-      const prop = unplainPropertyTemplate(time, type, "allergeni");
+      const prop = unplainPropertyTemplate(time, type, "allergies");
       const value = data[time][type].allergies;
       order[prop] = value;
     }

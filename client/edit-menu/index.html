@@ -7,15 +7,9 @@
       content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi"
     />
 
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://rawgit.com/vitmalina/w2ui/master/dist/w2ui.min.css"
-    />
     <link rel="stylesheet" type="text/css" href="styles.css" />
-
     <script src="../paths.js"></script>
-    <script src="./popup.js" type="module"></script>
+    <script src="../order/script.js" async defer></script>
     <script src="./script.js" async defer></script>
   </head>
 
@@ -26,12 +20,9 @@
       <section class="menu" id="menu"></section>
       <div class="order">
         <input
-          required
-          type="number"
+          type="text"
           placeholder="Numero camera"
           class="room-number-input"
-          min="0"
-          max="999"
         />
         <button class="order-button">Ordina</button>
       </div>

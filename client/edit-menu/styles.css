@@ -209,33 +209,6 @@ body {
   font-size: 14px;
   color: rgb(0, 0, 0, 0.3);
 }
-#w2ui-popup > .w2ui-box > .w2ui-popup-body {
-  font-size: 16px;
-  white-space: pre-line;
-  padding: 0 2em;
-  font-family: "Lato", sans-serif;
-}
-.w2ui-popup-body > .highlight {
-  font-weight: bolder;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-}
-.w2ui-popup-body > .bigger {
-  font-size: 1.3em;
-}
-button[data-click='["action","Yes","event"]'] {
-  background-color: rgb(63, 143, 61);
-  background-image: none;
-  color: white;
-  cursor: pointer;
-}
-button[data-click='["action","No","event"]'] {
-  background-color: rgb(222, 68, 70) ;
-  background-image: none;
-  color: white;
-  cursor: pointer;
-}
 @media (max-width: 600px) {
   .menu__item-image {
     width: 260px;

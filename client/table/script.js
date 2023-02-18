@@ -6,15 +6,12 @@ import {
   w2grid,
   w2form,
   w2utils,
-  w2alert,
   w2confirm,
-  query,
 } from "https://rawgit.com/vitmalina/w2ui/master/dist/w2ui.es6.min.js";
 
 class Order {
   constructor({ _id }) {
     this._id = _id;
-    console.log(this._id);
   }
   async delete() {
     const options = {
@@ -184,7 +181,7 @@ async function main() {
         }),
 
         {
-          field: "pranzo_primo_allergeni",
+          field: "pranzo_primo_allergies",
           type: "textarea",
           html: {
             label: "Allergeni ",
@@ -206,7 +203,7 @@ async function main() {
           group: "Pranzo - Secondo",
         }),
         {
-          field: "pranzo_secondo_allergeni",
+          field: "pranzo_secondo_allergies",
           type: "textarea",
           html: {
             label: "Allergeni ",
@@ -219,7 +216,7 @@ async function main() {
         masterField({ id: "cena_primo_1", group: "Cena - Primo" }),
         masterField({ id: "cena_primo_2", group: "Cena - Primo" }),
         {
-          field: "cena_primo_allergeni",
+          field: "cena_primo_allergies",
           type: "textarea",
           html: {
             label: "Allergeni ",
@@ -241,7 +238,7 @@ async function main() {
           group: "Cena - Secondo",
         }),
         {
-          field: "cena_secondo_allergeni",
+          field: "cena_secondo_allergies",
           type: "textarea",
           html: {
             label: "Allergeni ",
@@ -304,13 +301,13 @@ async function main() {
         { field: "pranzo_primo_0", text: mealNames.pranzo_primo[0] },
         { field: "pranzo_primo_1", text: mealNames.pranzo_primo[1] },
         { field: "pranzo_primo_2", text: mealNames.pranzo_primo[2] },
-        { field: "pranzo_primo_allergeni", text: "allergeni", sortable: true },
+        { field: "pranzo_primo_allergies", text: "Allergeni", sortable: true },
         { field: "pranzo_secondo_0", text: mealNames.pranzo_secondo[0] },
         { field: "pranzo_secondo_1", text: mealNames.pranzo_secondo[1] },
         { field: "pranzo_secondo_2", text: mealNames.pranzo_secondo[2] },
         {
-          field: "pranzo_secondo_allergeni",
-          text: "allergeni",
+          field: "pranzo_secondo_allergies",
+          text: "Allergeni",
           sortable: true,
         },
       ],
@@ -352,11 +349,11 @@ async function main() {
         { field: "cena_primo_0", text: mealNames.cena_primo[0] },
         { field: "cena_primo_1", text: mealNames.cena_primo[1] },
         { field: "cena_primo_2", text: mealNames.cena_primo[2] },
-        { field: "cena_primo_allergeni", text: "allergeni", sortable: true },
+        { field: "cena_primo_allergies", text: "Allergeni", sortable: true },
         { field: "cena_secondo_0", text: mealNames.cena_secondo[0] },
         { field: "cena_secondo_1", text: mealNames.cena_secondo[1] },
         { field: "cena_secondo_2", text: mealNames.cena_secondo[2] },
-        { field: "cena_secondo_allergeni", text: "allergeni", sortable: true },
+        { field: "cena_secondo_allergies", text: "Allergeni", sortable: true },
       ],
       records: getOrders(),
       onClick(event) {
