@@ -15,6 +15,25 @@ async function menuNew({ body }, res) {
   }
 }
 
+async function menuEdit({ body }, res) {
+  // This function will get the body as an plain UPDATED order
+  try {
+    // To update a record in a database first of all we will destructure the body to get the id
+    const { _id } = body;
+    // After that we will remove all the unnecessary properties of the order
+
+    // And finally we will find the order by id and the new order will be the unplain replica of the body
+    // Back we will get the new updated record from the database and we will send it as an response to the client
+    const data = await menuModel.findOneAndUpdate({ _id }, body, {
+      returnDocument: "after",
+    });
+
+    sendResult(data, res);
+  } catch (error) {
+    errorHandler(error, res);
+  }
+}
+
 async function menuLast(req, res) {
   try {
     const menus = await menuModel.find();
@@ -44,4 +63,4 @@ async function menuAll(req, res) {
   }
 }
 
-export { menuNew, menuAll, menuCurrent, menuLast };
+export { menuNew, menuAll, menuCurrent, menuLast, menuEdit };

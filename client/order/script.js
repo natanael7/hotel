@@ -70,7 +70,7 @@ const createMenuList = () => {
 };
 
 const createMeal = (item, index, type, time, menuList) => {
-  const id = type + "_" + time + "_" + item.title.replace(/ /g, "-");
+  const id = type + "_" + time + "_" + index;
   const menuItem = document.createElement("li");
   menuItem.classList.add("menu__item");
   menuItem.id = id;

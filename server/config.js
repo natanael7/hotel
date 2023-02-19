@@ -1,2 +1,2 @@
-const dirname = "../client/upload/";
+const dirname = "../client/src/img/";
 export { dirname };

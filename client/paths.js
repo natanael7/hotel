@@ -9,6 +9,7 @@ const url = {
   getLocalMenuLast: baseUrl + "/api/get/menu-local/last",
   postLocalMenu: baseUrl + "/api/post/menu-local",
   getMenuLast: baseUrl + "/api/get/menu/last",
+  editMenu: baseUrl + "/api/edit/menu",
   postOrder: baseUrl + "/api/post/order",
   deleteOrder: baseUrl + "/api/delete/order",
   updateOrder: baseUrl + "/api/edit/order",
@@ -54,3 +55,5 @@ const getOrderAllSummary = async (options) =>
 
 const getMenuCurrent = async (options) =>
   await fetchUrl(url.getMenuCurrent, options);
+
+const editMenu = async (options) => await fetchUrl(url.editMenu, options);

@@ -5,6 +5,7 @@ import { foodNew, filesUpload } from "../controllers/miscController.js";
 
 import {
   menuNew,
+  menuEdit,
   menuAll,
   menuLast,
   menuCurrent,
@@ -31,6 +32,8 @@ router.post("/post/files", filesUpload);
 
 // --- MENU ROUTES ---
 router.post("/post/menu", menuNew);
+
+router.post("/edit/menu", menuEdit);
 
 router.get("/get/menu/last", menuLast);
 
