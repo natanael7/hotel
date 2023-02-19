@@ -43,10 +43,37 @@ const orderScheme = new Schema({
   },
   order: Object,
 });
+const auditSchema = new Schema({
+  timestamp: {},
+  date: {},
+  time: {},
+  headers: {},
+  httpVersion: {},
+  method: {},
+  remoteAddress: {},
+  remoteFamily: {},
+  url: {},
+  body: {},
+});
+const errorSchema = new Schema({
+  timestamp: {},
+  date: {},
+  time: {},
+  error: {},
+});
 
 const foodModel = model("Food", foodScheme);
 const menuModel = model("Menu", menuScheme);
 const localMenuModel = model("Local-Menu", menuScheme);
 const orderModel = model("Order", orderScheme);
+const auditModel = model("Audit", auditSchema);
+const errorModel = model("Errors", errorSchema);
 
-export { foodModel, menuModel, localMenuModel, orderModel };
+export {
+  foodModel,
+  menuModel,
+  localMenuModel,
+  orderModel,
+  auditModel,
+  errorModel,
+};

@@ -57,3 +57,4 @@ const getMenuCurrent = async (options) =>
   await fetchUrl(url.getMenuCurrent, options);
 
 const editMenu = async (options) => await fetchUrl(url.editMenu, options);
+

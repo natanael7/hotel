@@ -18,19 +18,19 @@ save -> push data to save  --- DONE
 send -> push data to global  --- DONE
 getSaved -> get data from save --- DONE
 getSent -> get data from global --- DONE
-update menu
+update menu --- DONE
 
 -- FOOD ORDERING --
 sendOrder -> push data to orders  --- DONE
 
 -- ORDER MANAGEMENT --
 seeOrders -> get data from orders --- DONE
-generateReport -> get data from orders
+generateReport -> get data from orders --- DONE
 changeOrder -> update orders --- DONE
 deleteOrder --- DONE
 
 -- AUDIT TRAIL --
-every transaction will push a new object in the audit trail 
+every transaction will push a new object in the audit trail --- DONE
 {
   timestamp,
   action,
@@ -48,6 +48,7 @@ create a backup table for deleted items
 update refresh function
 create master for grid pranzo and grid cena, and put them in an array or object
 summary -> add date and hour generated
+define high priority modifications and make a separate table for them
 
 -- UI BUGS --
 dashboard -> flex-order for mobile
@@ -59,9 +60,3 @@ create a separate configuration json file
 refactor routes to be robust + test for invalid requests
 use close guards
 
-refactor and comment script files for
-order
-dashboard
-table
-summary
-edit menu

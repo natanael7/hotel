@@ -2,6 +2,7 @@ import { dirname } from "../config.js";
 
 import { v4 } from "uuid";
 import { foodModel } from "../models/models.js";
+import { auditModel } from "../models/models.js";
 import { Food } from "../classes/classes.js";
 
 import errorHandler from "../functions/errorHandler.js";
@@ -67,4 +68,4 @@ async function filesUpload(req, res) {
     errorHandler(error, res);
   }
 }
-export { foodNew, filesUpload };
+export { foodNew, filesUpload,  };

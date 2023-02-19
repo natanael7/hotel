@@ -1,5 +1,5 @@
-const REQUIRED = { image: true, title: true, description: true };
-const GLOBAL_PREFIX = "../upload/";
+const GLOBAL_PREFIX = "/upload/";
+const PREFIX = "/src/img/";
 
 class Food {
   constructor({ title = null, description = null, image = null }) {
@@ -53,12 +53,12 @@ class Menu {
     console.log(res);
     return res;
   }
-  applyIDs(ids = []) {
+  applyIDs(ids = [], prefix = "") {
     if (!Array.isArray(ids)) return;
     if (ids.length == 0) return;
     const applyID = (el) => {
       if (el.image == null) return;
-      if (el.image.constructor == File) el.image = ids.shift();
+      if (el.image.constructor == File) el.image = prefix + ids.shift();
     };
     this.loopAll(applyID);
   }
@@ -152,6 +152,13 @@ function clearData() {
           .removeAttribute("src");
       }
 }
+
+async function sendData() {
+
+  
+  // console.log("sending");
+  // location.reload()
+}
 async function saveData() {
   const data = getDataFromInputs();
 
@@ -161,8 +168,8 @@ async function saveData() {
 
   const fileIDs = await uploadFilesToServer(files);
 
-  menu.applyIDs(fileIDs);
-
+  menu.applyIDs(fileIDs, PREFIX);
+  console.log(JSON.stringify(menu));
   const options = {
     method: "POST",
     headers: {
@@ -171,7 +178,8 @@ async function saveData() {
     body: JSON.stringify(menu),
   };
 
-  fetch(url.postLocalMenu, options);
+  await fetch(url.postLocalMenu, options);
+  location.reload();
 }
 async function getAndWriteSavedData() {
   const res = await fetch(url.getLocalMenuLast);
@@ -192,7 +200,7 @@ async function getAndWriteSavedData() {
 
     if (element.image != null)
       document.querySelector(`#${mealTime}-${mealType}-${i + 1}-image`).src =
-        returnEmptyIfNull(element.image, { prefix: GLOBAL_PREFIX });
+        returnEmptyIfNull(element.image);
 
     // console.log(element);
   }

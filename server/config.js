@@ -1,2 +1,3 @@
 const dirname = "../client/src/img/";
-export { dirname };
+const PREFIX = "/src/img/";
+export { dirname, PREFIX };

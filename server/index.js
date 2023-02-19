@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import cors from "cors";
 import fileUpload from "express-fileupload";
+import audit from "./functions/audit.js";
 
 dotenv.config();
 const mongoString = process.env.DATABASE_URL;
@@ -19,6 +20,7 @@ app.use(
 );
 
 app.use(json());
+app.use(audit);
 app.use(urlencoded({ extended: true }));
 app.use(
   fileUpload({
