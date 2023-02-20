@@ -10,6 +10,7 @@ const url = {
   postLocalMenu: baseUrl + "/api/post/menu-local",
   getMenuLast: baseUrl + "/api/get/menu/last",
   editMenu: baseUrl + "/api/edit/menu",
+  postMenu: baseUrl + "/api/post/menu",
   postOrder: baseUrl + "/api/post/order",
   deleteOrder: baseUrl + "/api/delete/order",
   updateOrder: baseUrl + "/api/edit/order",
@@ -17,6 +18,8 @@ const url = {
   getMenuAll: baseUrl + "/api/get/menu/all",
   getOrderAllSummary: baseUrl + "/api/get/order/all/summary",
   getMenuCurrent: baseUrl + "/api/get/menu/current",
+  getOrderFiltered: baseUrl + "/api/get/order/filtered",
+  getOrderFilteredPlain: baseUrl + "/api/get/order/filtered/plain",
 };
 
 async function fetchUrl(url, options, returnResponse = false) {
@@ -57,4 +60,8 @@ const getMenuCurrent = async (options) =>
   await fetchUrl(url.getMenuCurrent, options);
 
 const editMenu = async (options) => await fetchUrl(url.editMenu, options);
-
+const postMenu = async (options) => await fetchUrl(url.postMenu, options);
+const getOrderFiltered = async (options) =>
+  await fetchUrl(url.getOrderFiltered, options);
+const getOrderFilteredPlain = async (options) =>
+  await fetchUrl(url.getOrderFilteredPlain, options);

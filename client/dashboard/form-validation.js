@@ -14,6 +14,6 @@ const validate = () => {
   );
   const empty = containers.map(isEmptySrcOrInput);
   let res = true;
-  empty.map((el) => res *= el);
+  empty.map((el) => (res *= el));
   return res;
 };

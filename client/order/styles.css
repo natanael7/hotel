@@ -159,6 +159,8 @@ body {
   text-align: center;
   letter-spacing: 2px;
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 15px;
 }
 .order > * {
@@ -200,13 +202,13 @@ body {
   border: none;
   box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.2);
   resize: vertical;
-  min-height: 79px;
+  min-height: 116px;
   max-height: 216px;
   box-sizing: border-box;
   font-family: "Lato", sans-serif;
 }
 .menu__allergen-input::placeholder {
-  font-size: 14px;
+  font-size: 20px;
   color: rgb(0, 0, 0, 0.3);
 }
 #w2ui-popup > .w2ui-box > .w2ui-popup-body {
@@ -224,6 +226,7 @@ body {
 .w2ui-popup-body > .bigger {
   font-size: 1.3em;
 }
+
 button[data-click='["action","Yes","event"]'] {
   background-color: rgb(63, 143, 61);
   background-image: none;
@@ -231,7 +234,7 @@ button[data-click='["action","Yes","event"]'] {
   cursor: pointer;
 }
 button[data-click='["action","No","event"]'] {
-  background-color: rgb(222, 68, 70) ;
+  background-color: rgb(222, 68, 70);
   background-image: none;
   color: white;
   cursor: pointer;
@@ -255,17 +258,25 @@ button[data-click='["action","No","event"]'] {
   .menu__item-quantity {
     height: 45px;
   }
+  .menu__item-quantity-input {
+    font-size: 20px;
+  }
   .menu__item-quantity-minus,
   .menu__item-quantity-plus {
+    font-size: 26px;
     width: 50px;
   }
   .menu__allergen-input {
-    min-height: 88px;
+    font-size: 22px;
+    min-height: 116px;
+  }
+  .w2ui-btn {
+    font-size: 20px !important;
   }
 }
 @media (max-width: 450px) {
   .menu__allergen-input {
-    min-height: 105px;
+    min-height: 116px;
   }
   .menu__meal {
     width: 80%;
@@ -273,5 +284,10 @@ button[data-click='["action","No","event"]'] {
   .menu__item-image {
     width: 220px;
     height: 220px;
+  }
+}
+@media (max-width: 320px) {
+  .w2ui-popup {
+    width: 300px !important;
   }
 }

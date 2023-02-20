@@ -1,5 +1,7 @@
 const GLOBAL_PREFIX = "/upload/";
 const PREFIX = "/src/img/";
+const CLEAR_AFTER_SEND = false;
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 class Food {
   constructor({ title = null, description = null, image = null }) {
@@ -152,12 +154,31 @@ function clearData() {
           .removeAttribute("src");
       }
 }
-
+async function alertIsNotValid() {
+  document.querySelector(".alert").style.opacity = ".7";
+  await sleep(3000);
+  document.querySelector(".alert").style.opacity = "0";
+}
 async function sendData() {
+  const data = getDataFromInputs();
 
-  
-  // console.log("sending");
-  // location.reload()
+  const menu = new Menu(data);
+
+  const files = menu.files();
+
+  const fileIDs = await uploadFilesToServer(files);
+
+  menu.applyIDs(fileIDs, PREFIX);
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(menu),
+  };
+
+  await postMenu(options);
+  location.reload();
 }
 async function saveData() {
   const data = getDataFromInputs();
@@ -169,7 +190,6 @@ async function saveData() {
   const fileIDs = await uploadFilesToServer(files);
 
   menu.applyIDs(fileIDs, PREFIX);
-  console.log(JSON.stringify(menu));
   const options = {
     method: "POST",
     headers: {
@@ -178,7 +198,11 @@ async function saveData() {
     body: JSON.stringify(menu),
   };
 
-  await fetch(url.postLocalMenu, options);
+  await postLocalMenu(options);
+  if (CLEAR_AFTER_SEND) {
+    clearData();
+    saveData();
+  }
   location.reload();
 }
 async function getAndWriteSavedData() {
@@ -219,3 +243,8 @@ highlighNonEmptyInputs();
 
 document.querySelector("#save").addEventListener("click", saveData);
 document.querySelector("#clear").addEventListener("click", clearData);
+document.querySelector("form").onsubmit = (event) => {
+  event.preventDefault();
+  if (validate()) sendData();
+  else alertIsNotValid();
+};

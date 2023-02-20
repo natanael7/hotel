@@ -1,5 +1,26 @@
 const capitalize = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 const removeDoubleNewLine = (text) => text.replace(/\n+/g, "\n");
+const addZero = (time) => ("0" + time).slice(-2);
+const getTime = (timestamp) =>
+  addZero(timestamp.getHours()) +
+  ":" +
+  addZero(timestamp.getMinutes()) +
+  ":" +
+  addZero(timestamp.getSeconds());
+const getDate = (timestamp) =>
+  addZero(timestamp.getDate()) +
+  "." +
+  addZero(timestamp.getMonth() + 1) +
+  "." +
+  timestamp.getFullYear();
+
+const getTimeNow = () => getTime(new Date());
+const getDateNow = () => getDate(new Date());
+function setDocumentTitle() {
+  document.querySelector(
+    "div.title"
+  ).textContent = `Menu Summary ${getDateNow()} ${getTimeNow()}`;
+}
 function createAndAppendAllergeni(name, parent) {
   const mealContainer = document.createElement("div");
   const meal = document.createElement("div");
@@ -128,6 +149,9 @@ async function main() {
 
   const summaryRes = await fetch(url.getOrderAllSummary);
   const summary = await summaryRes.json();
+
+  setDocumentTitle();
+
   parseSummary(menu, summary);
 }
 main();

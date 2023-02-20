@@ -21,9 +21,8 @@ class Order {
       },
       body: JSON.stringify(this),
     };
-    const res = await fetch(url.deleteOrder, options);
-    const json = await res.json();
-    console.log(json);
+    const res = await deleteOrder(options);
+    console.log(res);
   }
 }
 
@@ -34,21 +33,24 @@ window.showConfirm = function (record) {
     .yes(() => {
       const order = new Order(record);
       order.delete();
-      refresh();
+      location.reload();
     })
     .no(() => {});
 };
 async function main() {
-  window.refresh = () => {
-    gridCena.refresh();
-    gridPranzo.refresh();
-  };
+  await getData();
   async function getData() {
-    const menus = await (await fetch(url.getMenuAll)).json();
-    const orders = await (await fetch(url.getOrderAllPlain)).json();
-    return { menus, orders };
+    window.menu = await getMenuCurrent();
+
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ menuId: menu._id }),
+    };
+    window.orders = await getOrderFilteredPlain(options);
   }
-  const selectCorrectMenu = (menus) => menus[menus.length - 1];
   const mealNamesFromMenu = (menu) => {
     const names = {
       pranzo_primo: [],
@@ -66,10 +68,8 @@ async function main() {
     }
     return names;
   };
-  const { menus, orders } = await getData();
 
-  const actualMenu = selectCorrectMenu(menus);
-  const mealNames = mealNamesFromMenu(actualMenu);
+  const mealNames = mealNamesFromMenu(menu);
 
   const masterField = ({
     id,
@@ -94,20 +94,62 @@ async function main() {
     options: { arrows: true, min: 0, max: 50 },
   });
 
+  const masterGrid = (time) => ({
+    name: time,
+    show: {
+      toolbar: true,
+      lineNumbers: true,
+    },
+    columnGroups: [
+      { span: 1, text: "", main: true },
+      { span: 4, text: "Primo" },
+      { span: 4, text: "Secondo" },
+    ],
+
+    columns: [
+      {
+        field: "room",
+        text: "Camera",
+        sortable: true,
+        searchable: true,
+        width: "40px",
+      },
+      { field: `${time}_primo_0`, text: mealNames[`${time}_primo`][0] },
+      { field: `${time}_primo_1`, text: mealNames[`${time}_primo`][1] },
+      { field: `${time}_primo_2`, text: mealNames[`${time}_primo`][2] },
+      { field: `${time}_primo_allergies`, text: "Allergeni", sortable: true },
+      { field: `${time}_secondo_0`, text: mealNames[`${time}_secondo`][0] },
+      { field: `${time}_secondo_1`, text: mealNames[`${time}_secondo`][1] },
+      { field: `${time}_secondo_2`, text: mealNames[`${time}_secondo`][2] },
+      {
+        field: `${time}_secondo_allergies`,
+        text: "Allergeni",
+        sortable: true,
+      },
+    ],
+    records: orders,
+    onClick(event) {
+      event.done(() => {
+        var sel = this.getSelection();
+        if (sel.length == 1) {
+          form.recid = sel[0];
+          form.record = w2utils.extend({}, this.get(sel[0]));
+          form.refresh();
+        } else {
+          form.clear();
+        }
+      });
+    },
+  });
+
+  const masterGridArray = (arr) => arr.map(masterGrid);
+
   function renderTable() {
     layout.render("#main");
     layout.html("left", sidebar);
-    layout.html("main", gridPranzo);
+    layout.html("main", grids[0]);
     layout.html("right", form);
   }
-  const getOrders = () => {
-    const actualMenuId = actualMenu._id;
-
-    const filteredByMenu = orders.filter(
-      ({ menuId }) => menuId == actualMenuId
-    );
-    return filteredByMenu;
-  };
   const config = {
     layout: {
       name: "layout",
@@ -148,10 +190,10 @@ async function main() {
       onClick(event) {
         switch (event.target) {
           case "gridPranzo":
-            layout.html("main", gridPranzo);
+            layout.html("main", grids[0]);
             break;
           case "gridCena":
-            layout.html("main", gridCena);
+            layout.html("main", grids[1]);
             break;
         }
       },
@@ -263,10 +305,10 @@ async function main() {
             body: JSON.stringify(this.record),
           };
           await fetch(url.updateOrder, options);
-          gridPranzo.set(this.recid, this.record);
-          gridPranzo.selectNone();
-          gridCena.set(this.recid, this.record);
-          gridCena.selectNone();
+          grids.map((el) => {
+            el.set(this.recid, this.record);
+            el.selectNone();
+          });
           this.clear();
         },
         custom: {
@@ -278,106 +320,14 @@ async function main() {
         },
       },
     },
-    gridPranzo: {
-      name: "gridPranzo",
-      show: {
-        toolbar: true,
-        lineNumbers: true,
-      },
-      columnGroups: [
-        { span: 1, text: "", main: true },
-        { span: 4, text: "Primo" },
-        { span: 4, text: "Secondo" },
-      ],
-
-      columns: [
-        {
-          field: "room",
-          text: "Camera",
-          sortable: true,
-          searchable: true,
-          width: "40px",
-        },
-        { field: "pranzo_primo_0", text: mealNames.pranzo_primo[0] },
-        { field: "pranzo_primo_1", text: mealNames.pranzo_primo[1] },
-        { field: "pranzo_primo_2", text: mealNames.pranzo_primo[2] },
-        { field: "pranzo_primo_allergies", text: "Allergeni", sortable: true },
-        { field: "pranzo_secondo_0", text: mealNames.pranzo_secondo[0] },
-        { field: "pranzo_secondo_1", text: mealNames.pranzo_secondo[1] },
-        { field: "pranzo_secondo_2", text: mealNames.pranzo_secondo[2] },
-        {
-          field: "pranzo_secondo_allergies",
-          text: "Allergeni",
-          sortable: true,
-        },
-      ],
-      records: getOrders(),
-      onClick(event) {
-        console.log(event);
-        event.done(() => {
-          var sel = this.getSelection();
-          if (sel.length == 1) {
-            form.recid = sel[0];
-            form.record = w2utils.extend({}, this.get(sel[0]));
-            form.refresh();
-          } else {
-            form.clear();
-          }
-        });
-      },
-    },
-    gridCena: {
-      name: "gridCena",
-      show: {
-        toolbar: true,
-        lineNumbers: true,
-      },
-      columnGroups: [
-        { span: 1, text: "", main: true },
-        { span: 4, text: "Primo" },
-        { span: 4, text: "Secondo" },
-      ],
-
-      columns: [
-        {
-          field: "room",
-          text: "Camera",
-          sortable: true,
-          searchable: true,
-          width: "40px",
-        },
-        { field: "cena_primo_0", text: mealNames.cena_primo[0] },
-        { field: "cena_primo_1", text: mealNames.cena_primo[1] },
-        { field: "cena_primo_2", text: mealNames.cena_primo[2] },
-        { field: "cena_primo_allergies", text: "Allergeni", sortable: true },
-        { field: "cena_secondo_0", text: mealNames.cena_secondo[0] },
-        { field: "cena_secondo_1", text: mealNames.cena_secondo[1] },
-        { field: "cena_secondo_2", text: mealNames.cena_secondo[2] },
-        { field: "cena_secondo_allergies", text: "Allergeni", sortable: true },
-      ],
-      records: getOrders(),
-      onClick(event) {
-        console.log(event);
-        event.done(() => {
-          var sel = this.getSelection();
-          if (sel.length == 1) {
-            form.recid = sel[0];
-            form.record = w2utils.extend({}, this.get(sel[0]));
-            form.refresh();
-          } else {
-            form.clear();
-          }
-        });
-      },
-    },
+    grids: masterGridArray(["pranzo", "cena"]),
   };
 
   const layout = new w2layout(config.layout);
   const sidebar = new w2sidebar(config.sidebar);
   const form = new w2form(config.form);
 
-  const gridPranzo = new w2grid(config.gridPranzo);
-  const gridCena = new w2grid(config.gridCena);
+  const grids = config.grids.map((el) => new w2grid(el));
 
   renderTable();
 }

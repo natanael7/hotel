@@ -8,7 +8,6 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-
     <link rel="stylesheet" href="styles.css" />
     <script src="../paths.js"></script>
     <script src="./script.js" async defer></script>
@@ -18,7 +17,8 @@
   </head>
 
   <body>
-    <form action="" onsubmit="return sendData()">
+    <div role="alert" class="alert">Not all the inputs are filled in</div>
+    <form action="">
       <div class="container">
         <div class="meal-type header" id="pranzo">Pranzo</div>
         <div class="meal-order header" id="pranzo-primo">Primo</div>
@@ -161,7 +161,7 @@
             onchange="document.getElementById('pranzo-primo-3-image').src = window.URL.createObjectURL(this.files[0])"
           /><img class="meal-image" id="pranzo-primo-3-image" />
         </div>
-        <div class="meal-number image-input-container">
+        <div class="meal-number image-input-container flex-order">
           <input
             type="button"
             value="Image"
@@ -176,7 +176,7 @@
             onchange="document.getElementById('pranzo-secondo-1-image').src = window.URL.createObjectURL(this.files[0])"
           /><img class="meal-image" id="pranzo-secondo-1-image" />
         </div>
-        <div class="meal-number image-input-container">
+        <div class="meal-number image-input-container flex-order">
           <input
             type="button"
             value="Image"
@@ -191,7 +191,7 @@
             onchange="document.getElementById('pranzo-secondo-2-image').src = window.URL.createObjectURL(this.files[0])"
           /><img class="meal-image" id="pranzo-secondo-2-image" />
         </div>
-        <div class="meal-number image-input-container">
+        <div class="meal-number image-input-container flex-order">
           <input
             type="button"
             value="Image"
@@ -349,7 +349,7 @@
             onchange="document.getElementById('cena-primo-3-image').src = window.URL.createObjectURL(this.files[0])"
           /><img class="meal-image" id="cena-primo-3-image" />
         </div>
-        <div class="meal-number image-input-container">
+        <div class="meal-number image-input-container flex-order">
           <input
             type="button"
             value="Image"
@@ -364,7 +364,7 @@
             onchange="document.getElementById('cena-secondo-1-image').src = window.URL.createObjectURL(this.files[0])"
           /><img class="meal-image" id="cena-secondo-1-image" />
         </div>
-        <div class="meal-number image-input-container">
+        <div class="meal-number image-input-container flex-order">
           <input
             type="button"
             value="Image"
@@ -379,7 +379,7 @@
             onchange="document.getElementById('cena-secondo-2-image').src = window.URL.createObjectURL(this.files[0])"
           /><img class="meal-image" id="cena-secondo-2-image" />
         </div>
-        <div class="meal-number image-input-container">
+        <div class="meal-number image-input-container flex-order">
           <input
             type="button"
             value="Image"
