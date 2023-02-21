@@ -27,8 +27,12 @@ async function fetchUrl(url, options, returnResponse = false) {
 
   if (returnResponse) return res;
 
-  const json = await res.json();
-  return json;
+  if (res.ok) {
+    const json = await res.json();
+    return json;
+  } else {
+    return { error: true, res };
+  }
 }
 
 const uploadFiles = async (options) => await fetchUrl(url.uploadFiles, options);

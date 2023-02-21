@@ -144,11 +144,8 @@ function parseSummary(menu, summary) {
   }
 }
 async function main() {
-  const menuRes = await fetch(url.getMenuCurrent);
-  const menu = await menuRes.json();
-
-  const summaryRes = await fetch(url.getOrderAllSummary);
-  const summary = await summaryRes.json();
+  const menu = await getMenuCurrent();
+  const summary = await getOrderAllSummary();
 
   setDocumentTitle();
 

@@ -83,7 +83,7 @@ const uploadFilesToServer = async (files) => {
     body: formData,
   };
 
-  const res = await (await fetch(url.uploadFiles, options)).json();
+  const res = await uploadFiles(options);
   return res;
 };
 
@@ -214,7 +214,7 @@ async function saveData() {
     body: JSON.stringify(menu),
   };
 
-  fetch(url.postLocalMenu, options);
+  postLocalMenu(options);
 }
 
 async function updateMenuServer() {

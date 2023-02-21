@@ -132,7 +132,7 @@ const uploadFilesToServer = async (files) => {
     body: formData,
   };
 
-  const res = await (await fetch(url.uploadFiles, options)).json();
+  const res = await uploadFiles(options);
   return res;
 };
 function clearData() {
@@ -206,7 +206,7 @@ async function saveData() {
   location.reload();
 }
 async function getAndWriteSavedData() {
-  const res = await fetch(url.getLocalMenuLast);
+  const res = await getLocalMenuLast();
   const data = await res.json();
   const menu = new Menu(data);
 

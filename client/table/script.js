@@ -304,7 +304,7 @@ async function main() {
             },
             body: JSON.stringify(this.record),
           };
-          await fetch(url.updateOrder, options);
+          await updateOrder(options);
           grids.map((el) => {
             el.set(this.recid, this.record);
             el.selectNone();
