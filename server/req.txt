@@ -49,3 +49,4 @@ create UI settings
 create special views for waiters
 develop jest tests
 modify http responses(200,201, etc.)
+

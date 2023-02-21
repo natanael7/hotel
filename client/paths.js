@@ -1,4 +1,3 @@
-
 // -----   CONFIG   -----
 const THANK_YOU_URL = "/order/thank-you.html";
 const PROBLEM_URL = "/order/problem.html";
@@ -28,13 +27,12 @@ const url = {
     edit: baseUrl + "/api/edit/order",
     delete: baseUrl + "/api/delete/order",
     get: {
-      default: baseUrl + "/api/get/order",
+      default: baseUrl + "/api/get/order/default",
       plain: baseUrl + "/api/get/order/plain",
       summary: baseUrl + "/api/get/order/summary",
     },
   },
 };
-
 
 async function fetchUrl(url, options, returnResponse = false) {
   const res = await fetch(url, options);
@@ -84,3 +82,6 @@ const getOrdersSummary = async (options) =>
 
 const getOrdersPlain = async (options) =>
   await fetchUrl(url.order.get.plain, options);
+
+const getOrders = async (options) =>
+  await fetchUrl(url.order.get.default, options);
