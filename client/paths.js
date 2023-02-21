@@ -1,3 +1,4 @@
+
 // -----   CONFIG   -----
 const THANK_YOU_URL = "/order/thank-you.html";
 const PROBLEM_URL = "/order/problem.html";
@@ -33,6 +34,7 @@ const url = {
     },
   },
 };
+
 
 async function fetchUrl(url, options, returnResponse = false) {
   const res = await fetch(url, options);

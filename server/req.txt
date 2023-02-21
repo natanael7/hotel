@@ -42,7 +42,7 @@ try to reproduce undefined data summary
 create a global dashboard
 modify "get current menu" controll function
 modify some paths to an api-key based permission
-
+see all orders
 
 -- EXPERIMENTAL --
 create UI settings

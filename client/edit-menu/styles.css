@@ -209,6 +209,9 @@ body {
   font-size: 14px;
   color: rgb(0, 0, 0, 0.3);
 }
+.main {
+  margin-top: 35px;
+}
 @media (max-width: 600px) {
   .menu__item-image {
     width: 260px;

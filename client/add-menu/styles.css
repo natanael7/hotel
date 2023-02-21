@@ -3,7 +3,9 @@
   text-align: center;
   box-sizing: border-box;
 }
-
+body {
+  margin: 0;
+}
 .container {
   display: flex;
   flex-wrap: wrap;
@@ -86,15 +88,12 @@ textarea.meal-number {
   border: 1px solid #d0d0d0;
   font-size: 0.9rem;
 }
-div {
-  border: 1px solid #d0d0d0;
-}
 .meal-number:focus {
   border-color: #797979;
   border-width: 2px;
   outline: none;
 }
-button {
+.btn {
   background-color: #d0d0d0;
   color: #000;
   padding: 6px 14px;
@@ -133,6 +132,9 @@ textarea {
   -webkit-appearance: none;
   appearance: none;
   border-radius: 0;
+}
+form {
+  margin-top: 60px;
 }
 @media (max-width: 1024px) {
   .image-input-container {

@@ -70,3 +70,10 @@ button[data-click='["action","No","event"]'] {
 .w2ui-popup {
   height: 150px !important;
 }
+#main {
+  margin-top: 45px;
+}
+
+#toolbar {
+  z-index: 121;
+}

@@ -85,6 +85,9 @@
 .last-section {
   padding-bottom: 50px;
 }
+.title {
+  margin-top: 45px;
+}
 @media only screen and(max-width: 546px) {
   .container-time {
     width: 80%;
@@ -107,6 +110,9 @@
   }
 }
 @media print {
+  #toolbar {
+    display: none;
+  }
   .secondary-container > .pranzo-container,
   .container {
     page-break-after: always;
