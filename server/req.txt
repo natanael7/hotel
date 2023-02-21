@@ -31,32 +31,21 @@ deleteOrder --- DONE
 
 -- AUDIT TRAIL --
 every transaction will push a new object in the audit trail --- DONE
-{
-  timestamp,
-  action,
-  parameters,
-  ip,
-  fingerprint
-}
 
 
 -- MICRO TASKS --
-dashboard -> form validation on sending menu
-update handle error and imporve client-server communication
 expect to recieve a non-json response on client
-create a backup table for deleted items
-update refresh function
-create master for grid pranzo and grid cena, and put them in an array or object
-summary -> add date and hour generated
-define high priority modifications and make a separate table for them
+make only one request for get, and handle the parameters
+client -> remove all the fetches and use functions from path.js
+define  high priority modifications on the database(DELETE, UPDATE) and make a separate table for them
+try to reproduce undefined data summary
+create a global dashboard
+modify "get current menu" controll function
+modify some paths to an api-key based permission
 
--- UI BUGS --
-dashboard -> flex-order for mobile
-orders
 
--- CODE REFACTORING --
-create a separate master file for master functions
-create a separate configuration json file 
-refactor routes to be robust + test for invalid requests
-use close guards
-
+-- EXPERIMENTAL --
+create UI settings
+create special views for waiters
+develop jest tests
+modify http responses(200,201, etc.)

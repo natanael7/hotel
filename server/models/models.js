@@ -61,6 +61,28 @@ const errorSchema = new Schema({
   time: {},
   error: {},
 });
+const deletedOrderSchema = new Schema({
+  timestamp: {},
+  date: {},
+  time: {},
+  room: {
+    required: true,
+    type: String,
+  },
+  date: {
+    required: true,
+    type: String,
+  },
+  time: {
+    required: true,
+    type: String,
+  },
+  menuId: {
+    required: true,
+    type: String,
+  },
+  order: Object,
+});
 
 const foodModel = model("Food", foodScheme);
 const menuModel = model("Menu", menuScheme);
@@ -68,6 +90,7 @@ const localMenuModel = model("Local-Menu", menuScheme);
 const orderModel = model("Order", orderScheme);
 const auditModel = model("Audit", auditSchema);
 const errorModel = model("Errors", errorSchema);
+const deletedOrderModel = model("deletedOrder", deletedOrderSchema);
 
 export {
   foodModel,
@@ -76,4 +99,5 @@ export {
   orderModel,
   auditModel,
   errorModel,
+  deletedOrderModel,
 };

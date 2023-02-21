@@ -206,8 +206,7 @@ async function saveData() {
   location.reload();
 }
 async function getAndWriteSavedData() {
-  const res = await getLocalMenuLast();
-  const data = await res.json();
+  const data = await getLocalMenuLast();
   const menu = new Menu(data);
 
   function callback(mealTime, mealType, element, i) {

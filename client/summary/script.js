@@ -145,7 +145,13 @@ function parseSummary(menu, summary) {
 }
 async function main() {
   const menu = await getMenuCurrent();
-  const summary = await getOrderAllSummary();
+  const summary = await getOrdersSummary({
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ menuId: menu._id }),
+  });
 
   setDocumentTitle();
 

@@ -6,20 +6,32 @@ const baseUrl = "http://127.0.0.1:3000";
 
 const url = {
   uploadFiles: baseUrl + "/api/post/files",
-  getLocalMenuLast: baseUrl + "/api/get/menu-local/last",
-  postLocalMenu: baseUrl + "/api/post/menu-local",
-  getMenuLast: baseUrl + "/api/get/menu/last",
-  editMenu: baseUrl + "/api/edit/menu",
-  postMenu: baseUrl + "/api/post/menu",
-  postOrder: baseUrl + "/api/post/order",
-  deleteOrder: baseUrl + "/api/delete/order",
-  updateOrder: baseUrl + "/api/edit/order",
-  getOrderAllPlain: baseUrl + "/api/get/order/all/plain",
-  getMenuAll: baseUrl + "/api/get/menu/all",
-  getOrderAllSummary: baseUrl + "/api/get/order/all/summary",
-  getMenuCurrent: baseUrl + "/api/get/menu/current",
-  getOrderFiltered: baseUrl + "/api/get/order/filtered",
-  getOrderFilteredPlain: baseUrl + "/api/get/order/filtered/plain",
+
+  localMenu: {
+    post: baseUrl + "/api/post/menu-local",
+    get: {
+      last: baseUrl + "/api/get/menu-local/last",
+    },
+  },
+  menu: {
+    post: baseUrl + "/api/post/menu",
+    edit: baseUrl + "/api/edit/menu",
+    get: {
+      last: baseUrl + "/api/get/menu/last",
+      all: baseUrl + "/api/get/menu/all",
+      current: baseUrl + "/api/get/menu/current",
+    },
+  },
+  order: {
+    post: baseUrl + "/api/post/order",
+    edit: baseUrl + "/api/edit/order",
+    delete: baseUrl + "/api/delete/order",
+    get: {
+      default: baseUrl + "/api/get/order",
+      plain: baseUrl + "/api/get/order/plain",
+      summary: baseUrl + "/api/get/order/summary",
+    },
+  },
 };
 
 async function fetchUrl(url, options, returnResponse = false) {
@@ -31,41 +43,42 @@ async function fetchUrl(url, options, returnResponse = false) {
     const json = await res.json();
     return json;
   } else {
+    console.log(res);
     return { error: true, res };
   }
 }
 
+// ----   MISC   ----
 const uploadFiles = async (options) => await fetchUrl(url.uploadFiles, options);
 
+// ----   LOCAL-MENU   ----
 const getLocalMenuLast = async (options) =>
-  await fetchUrl(url.getLocalMenuLast, options);
+  await fetchUrl(url.localMenu.get.last, options);
 
 const postLocalMenu = async (options) =>
-  await fetchUrl(url.postLocalMenu, options);
+  await fetchUrl(url.localMenu.post, options);
 
-const getMenuLast = async (options) => await fetchUrl(url.getMenuLast, options);
-
-const postOrder = async (options, res) =>
-  await fetchUrl(url.postOrder, options, res);
-
-const deleteOrder = async (options) => await fetchUrl(url.deleteOrder, options);
-
-const updateOrder = async (options) => await fetchUrl(url.updateOrder, options);
-
-const getOrderAllPlain = async (options) =>
-  await fetchUrl(url.getOrderAllPlain, options);
-
-const getMenuAll = async (options) => await fetchUrl(url.getMenuAll, options);
-
-const getOrderAllSummary = async (options) =>
-  await fetchUrl(url.getOrderAllSummary, options);
+// ----   MENU   ----
+const getMenuLast = async (options) =>
+  await fetchUrl(url.menu.get.last, options);
 
 const getMenuCurrent = async (options) =>
-  await fetchUrl(url.getMenuCurrent, options);
+  await fetchUrl(url.menu.get.current, options);
 
-const editMenu = async (options) => await fetchUrl(url.editMenu, options);
-const postMenu = async (options) => await fetchUrl(url.postMenu, options);
-const getOrderFiltered = async (options) =>
-  await fetchUrl(url.getOrderFiltered, options);
-const getOrderFilteredPlain = async (options) =>
-  await fetchUrl(url.getOrderFilteredPlain, options);
+const editMenu = async (options) => await fetchUrl(url.menu.edit, options);
+const postMenu = async (options) => await fetchUrl(url.menu.post, options);
+
+// ----   ORDERS   ----
+const postOrder = async (options, res) =>
+  await fetchUrl(url.order.post, options, res);
+
+const deleteOrder = async (options) =>
+  await fetchUrl(url.order.delete, options);
+
+const editOrder = async (options) => await fetchUrl(url.order.edit, options);
+
+const getOrdersSummary = async (options) =>
+  await fetchUrl(url.order.get.summary, options);
+
+const getOrdersPlain = async (options) =>
+  await fetchUrl(url.order.get.plain, options);

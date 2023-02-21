@@ -49,7 +49,7 @@ async function main() {
       },
       body: JSON.stringify({ menuId: menu._id }),
     };
-    window.orders = await getOrderFilteredPlain(options);
+    window.orders = await getOrdersPlain(options);
   }
   const mealNamesFromMenu = (menu) => {
     const names = {
@@ -304,7 +304,7 @@ async function main() {
             },
             body: JSON.stringify(this.record),
           };
-          await updateOrder(options);
+          await editOrder(options);
           grids.map((el) => {
             el.set(this.recid, this.record);
             el.selectNone();

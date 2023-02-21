@@ -17,14 +17,16 @@ import {
 } from "../controllers/localMenuController.js";
 
 import {
+  orderGet,
   orderNew,
   orderEdit,
   orderDelete,
   orderAll,
+  orderFiltered,
+  orderFilteredPlain,
   orderAllPlain,
   orderAllSummary,
 } from "../controllers/orderController.js";
-
 
 // --- MISCELLANEOUS ROUTES ---
 router.post("/post/food", foodNew);
@@ -54,10 +56,16 @@ router.put("/edit/order", orderEdit);
 
 router.delete("/delete/order", orderDelete);
 
+router.post("/get/order/filtered", orderFiltered);
+
+router.post("/get/order/filtered/plain", orderFilteredPlain);
+
 router.get("/get/order/all", orderAll);
 
 router.get("/get/order/all/plain", orderAllPlain);
 
 router.get("/get/order/all/summary", orderAllSummary);
+
+router.post("/get/order/:mode", orderGet);
 
 export default router;
