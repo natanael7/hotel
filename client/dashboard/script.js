@@ -51,6 +51,20 @@ const createToolbar = (index) => {
       icon: "w2ui-icon-paste",
       link: "/order",
     },
+    {
+      type: "radio",
+      id: "experiment",
+      text: "Cucina",
+      icon: "w2ui-icon-paste",
+      link: "/experiment",
+    },
+    {
+      type: "radio",
+      id: "waiters",
+      text: "Camerieri",
+      icon: "w2ui-icon-paste",
+      link: "/waiters",
+    },
   ];
   items[index].checked = true;
   const container = document.createElement("div");

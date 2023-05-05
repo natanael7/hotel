@@ -4,14 +4,23 @@
 body {
   margin: 0;
   font-family: "Lato", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .card-container {
   display: flex;
-  justify-content: flex-start;
+  flex-flow: row wrap;
+  justify-content: space-between;
   flex-wrap: wrap;
   padding: 20px;
   gap: 1.25em;
+}
+.card-container::after {
+  content: "";
+  flex: auto;
 }
 .card {
   display: flex;
@@ -51,4 +60,21 @@ body {
 .card__list li::before {
   content: "• ";
   color: #007bff;
+}
+
+.selected {
+  font-weight: 800;
+  background-color: rgb(255, 177, 129);
+}
+#send {
+  font-family: "Montserrat", sans-serif;
+  color: #fff;
+  background-color: #28a745;
+  padding: 12px 20px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-transform: uppercase;
+  width: fit-content;
 }

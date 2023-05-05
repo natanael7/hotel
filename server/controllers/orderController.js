@@ -19,9 +19,7 @@ async function backupOrder(data) {
 
 async function orderNew({ body }, res) {
   try {
-    console.log(body.order.pranzo.primo);
     const data = new orderModel(new Order(body));
-    console.log(data);
     const dataToSave = await data.save();
     sendResult(dataToSave, res);
   } catch (error) {

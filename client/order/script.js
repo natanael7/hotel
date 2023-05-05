@@ -271,8 +271,14 @@ async function main() {
   addCountingFunctionality();
   preventManualChangeInputs();
   addOrderFunctionality(data);
-  generateDummyData();
-  // document.querySelector(".order-button").click();
+  // generateDummyData();
+
+  //   document.querySelector(".order-button").click();
+  // const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  //   await sleep(100);
+  //   document
+  //     .querySelector("#w2ui-popup > div.w2ui-popup-buttons > button:nth-child(1)")
+  //     .click();
 }
 
 main();

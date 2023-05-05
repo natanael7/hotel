@@ -1,7 +1,7 @@
 import { Router } from "express";
 const router = Router();
 
-import { foodNew, filesUpload } from "../controllers/miscController.js";
+import { filesUpload } from "../controllers/miscController.js";
 
 import {
   menuNew,
@@ -28,9 +28,14 @@ import {
   orderAllSummary,
 } from "../controllers/orderController.js";
 
-// --- MISCELLANEOUS ROUTES ---
-router.post("/post/food", foodNew);
+import {
+  dishNew,
+  dishEdit,
+  dishDelete,
+  dishGet,
+} from "../controllers/dishController.js";
 
+// --- MISCELLANEOUS ROUTES ---
 router.post("/post/files", filesUpload);
 
 // --- MENU ROUTES ---
@@ -67,5 +72,14 @@ router.get("/get/order/all/plain", orderAllPlain);
 router.get("/get/order/all/summary", orderAllSummary);
 
 router.post("/get/order/:mode", orderGet);
+
+// --- ORDER ROUTES ---
+router.post("/dish", dishNew);
+
+router.put("/dish", dishEdit);
+
+router.delete("/dish", dishDelete);
+
+router.get("/dish", dishGet);
 
 export default router;

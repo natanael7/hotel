@@ -1,22 +1,10 @@
 import { dirname } from "../config.js";
 
 import { v4 } from "uuid";
-import { foodModel } from "../models/models.js";
-import { auditModel } from "../models/models.js";
-import { Food } from "../classes/classes.js";
 
 import errorHandler from "../functions/errorHandler.js";
 import sendResult from "../functions/sendResult.js";
 
-async function foodNew({ body }, res) {
-  try {
-    const data = new foodModel(new Food(body));
-    const dataToSave = await data.save();
-    sendResult(dataToSave, res);
-  } catch (error) {
-    errorHandler(error, res);
-  }
-}
 async function filesUpload(req, res) {
   try {
     // To upload a file you have to move it specifying it's name
@@ -68,4 +56,4 @@ async function filesUpload(req, res) {
     errorHandler(error, res);
   }
 }
-export { foodNew, filesUpload,  };
+export { filesUpload };

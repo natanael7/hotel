@@ -1,0 +1,71 @@
+/* Global styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.header {
+  background-image: url('header-bg.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header__container {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  text-align: center;
+}
+
+.header__title {
+  font-size: 4rem;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.header__subtitle {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+.header__owner-chef {
+  font-style: italic;
+  font-size: 1.5rem;
+}
+@media only screen and (max-width: 767px) {
+  .header__title {
+    font-size: 3rem;
+    line-height: 1;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .header {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .header__subtitle {
+    font-size: 2rem;
+  }
+}
+
+
+@media only screen and (max-width: 767px) {
+  .header__owner-chef {
+    font-size: 1.2rem;
+  }
+}

@@ -1,0 +1,12 @@
+.editable-table .operation-column > span {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.editable-table .danger-btn {
+  color: rgba(255, 0, 0, 1);
+}
+.editable-table .danger-btn:hover {
+  color: rgba(255, 0, 0, 0.55);
+}
