@@ -31,6 +31,7 @@ async function dishEdit({ body }, res) {
 }
 
 async function dishDelete({ body }, res) {
+  console.log("deleting");
   try {
     const { _id } = body;
     const data = await foodModel.findOneAndDelete({ _id }).lean();

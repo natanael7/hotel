@@ -1,47 +1,42 @@
-div.food-image {
+.create-menu div.food-image {
   width: 35px;
   height: 35px;
 }
-div.food-image > img {
+.create-menu div.food-image > img {
   height: 100%;
   object-fit: cover;
   width: 100%;
 }
-.ant-table-tbody > tr > td.ant-table-cell {
+.create-menu .ant-table-tbody > tr > td.ant-table-cell {
   padding: 6px 16px;
 }
-.ant-table-tbody > tr:hover {
+.create-menu .ant-table-tbody > tr:hover {
   text-shadow: 0.7px 0px 0px rgba(0, 0, 0, 0.8);
 }
-
-.table-row-light {
+.create-menu .table-row-light {
   background-color: #fff;
 }
-
-.table-row-dark {
+.create-menu .table-row-dark {
   background-color: #f5f5f5;
 }
-
-div.page-menu {
+.create-menu div.page-menu {
   width: 100%;
 }
-div.page-container {
+.create-menu div.page-container {
   display: flex;
 }
-div.page-table {
+.create-menu div.page-table {
   width: 20%;
 }
-
-.page-table {
+.create-menu .page-table {
   padding: 0 20px;
 }
-.disabled {
+.create-menu .disabled {
   position: relative;
   height: 100vh;
   pointer-events: none;
 }
-
-.disabled::before {
+.create-menu .disabled::before {
   z-index: 1;
   content: "";
   display: block;
@@ -52,8 +47,6 @@ div.page-table {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.3);
 }
-
-th.image-column {
+.create-menu th.image-column {
   display: none;
 }
-

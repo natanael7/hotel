@@ -73,7 +73,7 @@ router.get("/get/order/all/summary", orderAllSummary);
 
 router.post("/get/order/:mode", orderGet);
 
-// --- ORDER ROUTES ---
+// --- DISH ROUTES ---
 router.post("/dish", dishNew);
 
 router.put("/dish", dishEdit);

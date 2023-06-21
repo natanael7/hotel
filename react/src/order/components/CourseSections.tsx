@@ -1,9 +1,9 @@
-import { CourseInterface } from "../../types";
+import { ICourse } from "../../types";
 import { capitalize } from "../misc";
 
 import FoodSection from "./FoodSection";
 
-export default function CourseSection({ time, course, type }: CourseInterface) {
+export default function CourseSection({ time, course, type }: ICourse) {
   const title = capitalize(time);
 
   const foodElements = course.options.map((food, index) => (

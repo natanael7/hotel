@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Input, InputNumber, Popconfirm, Table, Typography } from "antd";
 import "./EditableTable.css";
-
+import { UPDATE_FOOD, DELETE_FOOD } from "../../server-functions";
 interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
   editing: boolean;
   dataIndex: string;
@@ -11,6 +11,24 @@ interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
   index: number;
   children: React.ReactNode;
   rows?: number; // add the "rows" prop for the Input.TextArea component
+}
+interface FoodImageProps {
+  image: string;
+}
+interface APIResponse {
+  title: string;
+  description: string;
+  image: string;
+  _id: string;
+  v?: number;
+}
+interface Item extends APIResponse {
+  key: React.Key;
+}
+
+interface PropsInterface {
+  items: Item[];
+  fetchSetItems: Function;
 }
 
 const EditableCell: React.FC<EditableCellProps> = ({
@@ -24,7 +42,6 @@ const EditableCell: React.FC<EditableCellProps> = ({
   rows = 3, // set a default value for the "rows" prop
   ...restProps
 }) => {
-  console.log(inputType);
   const inputNode =
     inputType === "number" ? (
       <InputNumber />
@@ -55,159 +72,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
     </td>
   );
 };
-
-interface FoodImageProps {
-  image: string;
-}
-
-interface APIResponse {
-  title: string;
-  description: string;
-  image: string;
-}
-interface Item extends APIResponse {
-  key: React.Key;
-}
-const response: APIResponse[] = [
-  {
-    title: "Canelloni",
-    description:
-      "pasta ripiena di pesce e aromi marini, condita con salsa di pomodoro e besciamella.\n\n",
-    image: "/src/img/73ce1bcb-ab10-43a9-8b15-be0f7fe0873a.avif",
-  },
-  {
-    title: "pasta ala matriciana",
-    description: "pasta alla matriciana",
-    image: "/src/img/d5137045-2709-4380-ae70-60a829d33ce7.jpeg",
-  },
-  {
-    title: "Pasta al pomodoro",
-    description:
-      "pasta semplice condita con salsa di pomodoro fresco e basilico.\n\n",
-    image: "/src/img/33a0e276-7673-46fe-8d3c-60fe3b0ede4a.webp",
-  },
-  {
-    title: "Canelloni",
-    description:
-      "pasta ripiena di pesce e aromi marini, condita con salsa di pomodoro e besciamella.\n\n",
-    image: "/src/img/73ce1bcb-ab10-43a9-8b15-be0f7fe0873a.avif",
-  },
-  {
-    title: "pasta ala matriciana",
-    description: "pasta alla matriciana",
-    image: "/src/img/d5137045-2709-4380-ae70-60a829d33ce7.jpeg",
-  },
-  {
-    title: "Pasta al pomodoro",
-    description:
-      "pasta semplice condita con salsa di pomodoro fresco e basilico.\n\n",
-    image: "/src/img/33a0e276-7673-46fe-8d3c-60fe3b0ede4a.webp",
-  },
-  {
-    title: "Canelloni",
-    description:
-      "pasta ripiena di pesce e aromi marini, condita con salsa di pomodoro e besciamella.\n\n",
-    image: "/src/img/73ce1bcb-ab10-43a9-8b15-be0f7fe0873a.avif",
-  },
-  {
-    title: "pasta ala matriciana",
-    description: "pasta alla matriciana",
-    image: "/src/img/d5137045-2709-4380-ae70-60a829d33ce7.jpeg",
-  },
-  {
-    title: "Pasta al pomodoro",
-    description:
-      "pasta semplice condita con salsa di pomodoro fresco e basilico.\n\n",
-    image: "/src/img/33a0e276-7673-46fe-8d3c-60fe3b0ede4a.webp",
-  },
-  {
-    title: "Canelloni",
-    description:
-      "pasta ripiena di pesce e aromi marini, condita con salsa di pomodoro e besciamella.\n\n",
-    image: "/src/img/73ce1bcb-ab10-43a9-8b15-be0f7fe0873a.avif",
-  },
-  {
-    title: "pasta ala matriciana",
-    description: "pasta alla matriciana",
-    image: "/src/img/d5137045-2709-4380-ae70-60a829d33ce7.jpeg",
-  },
-  {
-    title: "Pasta al pomodoro",
-    description:
-      "pasta semplice condita con salsa di pomodoro fresco e basilico.\n\n",
-    image: "/src/img/33a0e276-7673-46fe-8d3c-60fe3b0ede4a.webp",
-  },
-  {
-    title: "Canelloni",
-    description:
-      "pasta ripiena di pesce e aromi marini, condita con salsa di pomodoro e besciamella.\n\n",
-    image: "/src/img/73ce1bcb-ab10-43a9-8b15-be0f7fe0873a.avif",
-  },
-  {
-    title: "pasta ala matriciana",
-    description: "pasta alla matriciana",
-    image: "/src/img/d5137045-2709-4380-ae70-60a829d33ce7.jpeg",
-  },
-  {
-    title: "Pasta al pomodoro",
-    description:
-      "pasta semplice condita con salsa di pomodoro fresco e basilico.\n\n",
-    image: "/src/img/33a0e276-7673-46fe-8d3c-60fe3b0ede4a.webp",
-  },
-  {
-    title: "Canelloni",
-    description:
-      "pasta ripiena di pesce e aromi marini, condita con salsa di pomodoro e besciamella.\n\n",
-    image: "/src/img/73ce1bcb-ab10-43a9-8b15-be0f7fe0873a.avif",
-  },
-  {
-    title: "pasta ala matriciana",
-    description: "pasta alla matriciana",
-    image: "/src/img/d5137045-2709-4380-ae70-60a829d33ce7.jpeg",
-  },
-  {
-    title: "Pasta al pomodoro",
-    description:
-      "pasta semplice condita con salsa di pomodoro fresco e basilico.\n\n",
-    image: "/src/img/33a0e276-7673-46fe-8d3c-60fe3b0ede4a.webp",
-  },
-  {
-    title: "Canelloni",
-    description:
-      "pasta ripiena di pesce e aromi marini, condita con salsa di pomodoro e besciamella.\n\n",
-    image: "/src/img/73ce1bcb-ab10-43a9-8b15-be0f7fe0873a.avif",
-  },
-  {
-    title: "pasta ala matriciana",
-    description: "pasta alla matriciana",
-    image: "/src/img/d5137045-2709-4380-ae70-60a829d33ce7.jpeg",
-  },
-  {
-    title: "Pasta al pomodoro",
-    description:
-      "pasta semplice condita con salsa di pomodoro fresco e basilico.\n\n",
-    image: "/src/img/33a0e276-7673-46fe-8d3c-60fe3b0ede4a.webp",
-  },
-  {
-    title: "Canelloni",
-    description:
-      "pasta ripiena di pesce e aromi marini, condita con salsa di pomodoro e besciamella.\n\n",
-    image: "/src/img/73ce1bcb-ab10-43a9-8b15-be0f7fe0873a.avif",
-  },
-  {
-    title: "pasta ala matriciana",
-    description: "pasta alla matriciana",
-    image: "/src/img/d5137045-2709-4380-ae70-60a829d33ce7.jpeg",
-  },
-  {
-    title: "Pasta al pomodoro",
-    description:
-      "pasta semplice condita con salsa di pomodoro fresco e basilico.\n\n",
-    image: "/src/img/33a0e276-7673-46fe-8d3c-60fe3b0ede4a.webp",
-  },
-];
-
-function FoodImage({ image }: FoodImageProps) {
+const FoodImage: React.FC<FoodImageProps> = ({ image }: FoodImageProps) => {
   return (
     <img
       src={image.replace("/src", "")}
@@ -223,15 +88,14 @@ function FoodImage({ image }: FoodImageProps) {
       }}
     />
   );
-}
-const App: React.FC = () => {
-  const items: Item[] = response.map((el, idx) => ({
-    ...el,
-    key: idx.toString(),
-  }));
+};
+
+const EditableTable: React.FC<PropsInterface> = ({ items, fetchSetItems }) => {
+  useEffect(() => {
+    fetchSetItems();
+  }, []);
 
   const [form] = Form.useForm();
-  const [data, setData] = useState(items);
   const [editingKey, setEditingKey] = useState<React.Key>("");
 
   const isEditing = (record: Item) => record.key === editingKey;
@@ -249,7 +113,7 @@ const App: React.FC = () => {
     try {
       const row = (await form.validateFields()) as Item;
 
-      const newData = [...data];
+      const newData = [...items];
       const index = newData.findIndex((item) => key === item.key);
       if (index > -1) {
         const item = newData[index];
@@ -257,24 +121,23 @@ const App: React.FC = () => {
           ...item,
           ...row,
         });
-        setData(newData);
+        await UPDATE_FOOD(newData[index]);
+        await fetchSetItems();
         setEditingKey("");
       } else {
-        newData.push(row);
-        setData(newData);
-        setEditingKey("");
+        throw "Unknow updating element";
       }
     } catch (errInfo) {
       console.log("Validate Failed:", errInfo);
     }
   };
 
-  const deleteRecord = (key: React.Key) => {
-    const newData = [...data];
+  const deleteRecord = async (key: React.Key) => {
+    const newData = [...items];
     const index = newData.findIndex((item) => key === item.key);
     if (index > -1) {
-      newData.splice(index, 1); // Remove the item from the array
-      setData(newData); // Set the new data
+      await DELETE_FOOD(newData[index]);
+      await fetchSetItems();
     }
   };
 
@@ -285,6 +148,7 @@ const App: React.FC = () => {
       key: "title",
       editable: true,
       sorter: (a: any, b: any) => a.title.localeCompare(b.title),
+      className: "column-title",
       inputType: "textarea", // set the inputType prop to "textarea"
     },
     {
@@ -292,7 +156,8 @@ const App: React.FC = () => {
       dataIndex: "description",
       key: "description",
       editable: true,
-      inputType: "textarea", // set the inputType prop to "textarea"
+      inputType: "textarea",
+      className: "column-description",
     },
     {
       title: "Imagine",
@@ -376,16 +241,16 @@ const App: React.FC = () => {
           },
         }}
         bordered
-        dataSource={data}
+        dataSource={items}
         columns={mergedColumns}
         rowClassName="editable-row"
         pagination={{
           onChange: cancel,
-          pageSize: 8,
+          pageSize: 7,
         }}
       />
     </Form>
   );
 };
 
-export default App;
+export default EditableTable;

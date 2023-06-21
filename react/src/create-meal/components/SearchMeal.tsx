@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, FC } from "react";
 import generateDescription from "../misc/generateDescription";
 import generateImages from "../misc/generateImages";
 import { ImageInterface } from "../../types";
@@ -6,8 +6,12 @@ import SearchElement from "./SearchElement";
 import Loader from "./Loader";
 import ResultSection from "./ResultSection";
 
-export default function SearchMeal() {
-  const [dishname, setDishname] = useState("");
+interface PropsInterface {
+  fetchSetItems: Function;
+}
+
+const SearchMeal: FC<PropsInterface> = ({ fetchSetItems }) => {
+  const [foodname, setFoodname] = useState("");
   const [description, setDescription] = useState("");
   const [images, setImages] = useState<ImageInterface[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -17,10 +21,10 @@ export default function SearchMeal() {
     setShowResult(true);
     setIsLoading(true);
 
-    const newDescription = await generateDescription(dishname);
+    const newDescription = await generateDescription(foodname);
     setDescription(newDescription);
 
-    const newImages = await generateImages(dishname);
+    const newImages = await generateImages(foodname);
     setImages(newImages);
 
     setIsLoading(false);
@@ -29,8 +33,8 @@ export default function SearchMeal() {
   return (
     <>
       <SearchElement
-        dishname={dishname}
-        setDishname={setDishname}
+        foodname={foodname}
+        setFoodname={setFoodname}
         handleButtonClick={handleButtonClick}
       />
       {showResult &&
@@ -38,12 +42,15 @@ export default function SearchMeal() {
           <Loader />
         ) : (
           <ResultSection
-            dishname={dishname}
+            foodname={foodname}
             description={description}
             setDescription={setDescription}
             images={images}
+            fetchSetItems={fetchSetItems}
           />
         ))}
     </>
   );
-}
+};
+
+export default SearchMeal;

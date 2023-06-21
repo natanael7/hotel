@@ -1,26 +1,26 @@
 import { useState, FC, ReactNode } from "react";
 import { FaCheckCircle, FaTimes } from "react-icons/fa";
-
-interface Props {
-  description: string;
+import { POST_FOOD } from "../../server-functions";
+interface APIResponse {
   title: string;
+  description: string;
   image: string;
+  _id?: string;
+  v?: number;
+}
+
+interface PropsInterface extends APIResponse {
+  fetchSetItems: Function;
 }
 
 type Status = "success" | "fail" | "pending";
-const ResultMeal = ({ description, title, image }: Props) => {
-  const Pending = () => {
-    return (
-      <div className="result-meal__container">
-        <h4 className="result-meal__title">{title}</h4>
-        <img src={image} alt="" className="result-meal__img" />
-        <p className="result-meal__desc">{description}</p>
-        <button className="result-meal__button" onClick={createNewMeal}>
-          Agiungi
-        </button>
-      </div>
-    );
-  };
+
+const ResultMeal: FC<PropsInterface> = ({
+  description,
+  title,
+  image,
+  fetchSetItems,
+}) => {
   const Executed: FC<{
     children: ReactNode;
     color: string;
@@ -33,6 +33,18 @@ const ResultMeal = ({ description, title, image }: Props) => {
         >
           {children}
         </div>
+      </div>
+    );
+  };
+  const Pending = () => {
+    return (
+      <div className="result-meal__container">
+        <h4 className="result-meal__title">{title}</h4>
+        <img src={image} alt="" className="result-meal__img" />
+        <p className="result-meal__desc">{description}</p>
+        <button className="result-meal__button" onClick={createNewMeal}>
+          Agiungi
+        </button>
       </div>
     );
   };
@@ -55,8 +67,9 @@ const ResultMeal = ({ description, title, image }: Props) => {
 
   const createNewMeal = async () => {
     try {
-      console.log({ description, title, image });
+      await POST_FOOD({ description, title, image, _id: "" });
       setStatus("success");
+      await fetchSetItems();
     } catch (err) {
       console.log(err);
       setStatus("fail");

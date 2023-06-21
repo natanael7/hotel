@@ -1,9 +1,12 @@
-import { MealInterface, timeCategories } from "../../types";
+import { IMeal, timeCategories } from "../../types";
 import { capitalize } from "../misc";
 import CourseSection from "./CourseSections";
 import AllergiesTextArea from "./AllergiesTextArea";
 
-export default function MenuSection({ type, meal }: MealInterface) {
+
+
+
+export default function MenuSection({ type, meal }: IMeal) {
   const title = capitalize(type);
 
   const courseElements = timeCategories.map((time, index) => (

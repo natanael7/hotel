@@ -1,12 +1,12 @@
 import QtyCounter from "./QtyCounter";
-import { FoodInterface } from "../../types";
+import { IFood } from "../../types";
 
 export default function FoodSection({
   food: { title, description, image },
   time,
   type,
   index,
-}: FoodInterface) {
+}: IFood) {
   return (
     <li className="menu__item" id={`${type}_${time}_${index}`}>
       <h4 className="menu__item-title">{title}</h4>

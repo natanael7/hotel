@@ -6,17 +6,19 @@ import { ImageInterface } from "../../types";
 import { useState } from "react";
 
 interface Props {
-  dishname: string;
+  foodname: string;
   description: string;
   setDescription: Function;
   images: ImageInterface[];
+  fetchSetItems: Function;
 }
 
 const ResultSection = ({
-  dishname,
+  foodname,
   description,
   setDescription,
   images,
+  fetchSetItems,
 }: Props) => {
   const [selectedImageSrc, setSelectedImageSrc] = useState("");
 
@@ -32,7 +34,8 @@ const ResultSection = ({
         <ResultMeal
           description={description}
           image={selectedImageSrc}
-          title={capitalize(dishname)}
+          title={capitalize(foodname)}
+          fetchSetItems={fetchSetItems}
         />
       )}
     </div>

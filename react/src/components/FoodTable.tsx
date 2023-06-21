@@ -1,8 +1,9 @@
 import { Table, Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 const { Search } = Input;
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ColumnType, ColumnGroupType } from "antd/es/table";
+import { GET_FOOD } from "../server-functions";
 
 interface APIResponse {
   title: string;
@@ -10,165 +11,35 @@ interface APIResponse {
   image: string;
   key?: number;
 }
-const response: APIResponse[] = [
-  {
-    title: "Canelloni",
-    description:
-      "pasta ripiena di pesce e aromi marini, condita con salsa di pomodoro e besciamella.\n\n",
-    image: "/src/img/73ce1bcb-ab10-43a9-8b15-be0f7fe0873a.avif",
-  },
-  {
-    title: "pasta ala matriciana",
-    description: "pasta alla matriciana",
-    image: "/src/img/d5137045-2709-4380-ae70-60a829d33ce7.jpeg",
-  },
-  {
-    title: "Pasta al pomodoro",
-    description:
-      "pasta semplice condita con salsa di pomodoro fresco e basilico.\n\n",
-    image: "/src/img/33a0e276-7673-46fe-8d3c-60fe3b0ede4a.webp",
-  },
-  {
-    title: "Canelloni",
-    description:
-      "pasta ripiena di pesce e aromi marini, condita con salsa di pomodoro e besciamella.\n\n",
-    image: "/src/img/73ce1bcb-ab10-43a9-8b15-be0f7fe0873a.avif",
-  },
-  {
-    title: "pasta ala matriciana",
-    description: "pasta alla matriciana",
-    image: "/src/img/d5137045-2709-4380-ae70-60a829d33ce7.jpeg",
-  },
-  {
-    title: "Pasta al pomodoro",
-    description:
-      "pasta semplice condita con salsa di pomodoro fresco e basilico.\n\n",
-    image: "/src/img/33a0e276-7673-46fe-8d3c-60fe3b0ede4a.webp",
-  },
-  {
-    title: "Canelloni",
-    description:
-      "pasta ripiena di pesce e aromi marini, condita con salsa di pomodoro e besciamella.\n\n",
-    image: "/src/img/73ce1bcb-ab10-43a9-8b15-be0f7fe0873a.avif",
-  },
-  {
-    title: "pasta ala matriciana",
-    description: "pasta alla matriciana",
-    image: "/src/img/d5137045-2709-4380-ae70-60a829d33ce7.jpeg",
-  },
-  {
-    title: "Pasta al pomodoro",
-    description:
-      "pasta semplice condita con salsa di pomodoro fresco e basilico.\n\n",
-    image: "/src/img/33a0e276-7673-46fe-8d3c-60fe3b0ede4a.webp",
-  },
-  {
-    title: "Canelloni",
-    description:
-      "pasta ripiena di pesce e aromi marini, condita con salsa di pomodoro e besciamella.\n\n",
-    image: "/src/img/73ce1bcb-ab10-43a9-8b15-be0f7fe0873a.avif",
-  },
-  {
-    title: "pasta ala matriciana",
-    description: "pasta alla matriciana",
-    image: "/src/img/d5137045-2709-4380-ae70-60a829d33ce7.jpeg",
-  },
-  {
-    title: "Pasta al pomodoro",
-    description:
-      "pasta semplice condita con salsa di pomodoro fresco e basilico.\n\n",
-    image: "/src/img/33a0e276-7673-46fe-8d3c-60fe3b0ede4a.webp",
-  },
-  {
-    title: "Canelloni",
-    description:
-      "pasta ripiena di pesce e aromi marini, condita con salsa di pomodoro e besciamella.\n\n",
-    image: "/src/img/73ce1bcb-ab10-43a9-8b15-be0f7fe0873a.avif",
-  },
-  {
-    title: "pasta ala matriciana",
-    description: "pasta alla matriciana",
-    image: "/src/img/d5137045-2709-4380-ae70-60a829d33ce7.jpeg",
-  },
-  {
-    title: "Pasta al pomodoro",
-    description:
-      "pasta semplice condita con salsa di pomodoro fresco e basilico.\n\n",
-    image: "/src/img/33a0e276-7673-46fe-8d3c-60fe3b0ede4a.webp",
-  },
-  {
-    title: "Canelloni",
-    description:
-      "pasta ripiena di pesce e aromi marini, condita con salsa di pomodoro e besciamella.\n\n",
-    image: "/src/img/73ce1bcb-ab10-43a9-8b15-be0f7fe0873a.avif",
-  },
-  {
-    title: "pasta ala matriciana",
-    description: "pasta alla matriciana",
-    image: "/src/img/d5137045-2709-4380-ae70-60a829d33ce7.jpeg",
-  },
-  {
-    title: "Pasta al pomodoro",
-    description:
-      "pasta semplice condita con salsa di pomodoro fresco e basilico.\n\n",
-    image: "/src/img/33a0e276-7673-46fe-8d3c-60fe3b0ede4a.webp",
-  },
-  {
-    title: "Canelloni",
-    description:
-      "pasta ripiena di pesce e aromi marini, condita con salsa di pomodoro e besciamella.\n\n",
-    image: "/src/img/73ce1bcb-ab10-43a9-8b15-be0f7fe0873a.avif",
-  },
-  {
-    title: "pasta ala matriciana",
-    description: "pasta alla matriciana",
-    image: "/src/img/d5137045-2709-4380-ae70-60a829d33ce7.jpeg",
-  },
-  {
-    title: "Pasta al pomodoro",
-    description:
-      "pasta semplice condita con salsa di pomodoro fresco e basilico.\n\n",
-    image: "/src/img/33a0e276-7673-46fe-8d3c-60fe3b0ede4a.webp",
-  },
-  {
-    title: "Canelloni",
-    description:
-      "pasta ripiena di pesce e aromi marini, condita con salsa di pomodoro e besciamella.\n\n",
-    image: "/src/img/73ce1bcb-ab10-43a9-8b15-be0f7fe0873a.avif",
-  },
-  {
-    title: "pasta ala matriciana",
-    description: "pasta alla matriciana",
-    image: "/src/img/d5137045-2709-4380-ae70-60a829d33ce7.jpeg",
-  },
-  {
-    title: "Pasta al pomodoro",
-    description:
-      "pasta semplice condita con salsa di pomodoro fresco e basilico.\n\n",
-    image: "/src/img/33a0e276-7673-46fe-8d3c-60fe3b0ede4a.webp",
-  },
-];
+
 interface Props {
   columns: (ColumnType<APIResponse> | ColumnGroupType<APIResponse>)[];
   pagination?: number;
   handleClickOnRow?: Function;
 }
 
-
 export default function FoodTable({
   columns,
   pagination = 20,
   handleClickOnRow = () => 1,
 }: Props) {
+  // const response = await GET_FOOD();
+  const [foodList, setFoodList] = useState<APIResponse[]>([]);
+  const [searchValue, setSearchValue] = useState("");
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await GET_FOOD();
+        setFoodList(response.map((food, index) => ({ ...food, key: index })));
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchData();
+  }, []);
   const getRowClassName = (_: any, index: number) => {
     return index % 2 === 0 ? "table-row-light" : "table-row-dark";
   };
-  const foodList = response.map((food, index) => {
-    food["key"] = index;
-    return food;
-  });
-  const [searchValue, setSearchValue] = useState("");
-
   // Define a function to handle the search query
   const handleSearch = (value: string) => setSearchValue(value);
 

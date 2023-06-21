@@ -84,11 +84,11 @@ const API_KEY = "AIzaSyCZO2gq1rObH-_i5s4kUCJg87VftsEjkKA";
 const SE_ID = "b59a4b661a3644696";
 
 export default async function generateImages(
-  dishName: string,
+  foodName: string,
   max = 9
 ): Promise<ImageInterface[]> {
   try {
-    const res = await fetch(endpointGenerator(API_KEY, SE_ID, dishName));
+    const res = await fetch(endpointGenerator(API_KEY, SE_ID, foodName));
     const data: GoogleResponse = await res.json();
     const result = data.items.map(get_links);
     while (result.length > max) result.pop();

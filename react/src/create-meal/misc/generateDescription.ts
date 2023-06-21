@@ -12,12 +12,12 @@ interface responseInterface {
   choices: choiceInterface[];
 }
 
-export default async function generateDescription(dishName: string) {
+export default async function generateDescription(foodName: string) {
   const apiKey = OPENAI_API_KEY;
   const prompt = `La descrizione di un piatto dovrebbe contenere il nome, gli ingredienti principali, il metodo di preparazione, i condimenti o le salse e il gusto in massimo 70 parole.
 Per esempio la descrizzione della "Pasta al pomodoro" su un sito web: "pasta semplice condita con salsa di pomodoro fresco e basilico."
 
-La descrizzione della "${dishName}" su un sito web:`;
+La descrizzione della "${foodName}" su un sito web:`;
   const model = "text-davinci-003";
   const temperature = 0.1;
   const maxTokens = 150;

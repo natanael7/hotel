@@ -8,13 +8,13 @@ import {
   timeCategories,
   modeType,
   FoodsContextType,
-  PrimitiveFoodInterface,
+  IPrimitiveFood,
   FoodState,
   ApplicationControlInterface,
   FoodsContextInterface,
 } from "../types";
 
-const DEFAULT_FOOD: PrimitiveFoodInterface = {
+const DEFAULT_FOOD: IPrimitiveFood = {
   title: "Null_Title",
   description: "null_description",
   image: "",
@@ -86,20 +86,22 @@ const CreateMenu = () => {
     },
   ];
 
-  const handleClickOnRow = (record: PrimitiveFoodInterface) => {
+  const handleClickOnRow = (record: IPrimitiveFood) => {
     setItem(record);
     setMode("LIST");
   };
 
   return (
-    <div className="page-container">
-      <div className={`page-menu ${mode === "TABLE" ? "disabled" : ""}`}>
-        <FoodsContext.Provider value={menuContext}>
-          <MenuManagement />
-        </FoodsContext.Provider>
-      </div>
-      <div className={`page-table ${mode === "LIST" ? "disabled" : ""}`}>
-        <FoodTable columns={columns} handleClickOnRow={handleClickOnRow} />
+    <div className="create-menu">
+      <div className="page-container">
+        <div className={`page-menu ${mode === "TABLE" ? "disabled" : ""}`}>
+          <FoodsContext.Provider value={menuContext}>
+            <MenuManagement />
+          </FoodsContext.Provider>
+        </div>
+        <div className={`page-table ${mode === "LIST" ? "disabled" : ""}`}>
+          <FoodTable columns={columns} handleClickOnRow={handleClickOnRow} />
+        </div>
       </div>
     </div>
   );

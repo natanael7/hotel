@@ -2,14 +2,14 @@ import { MouseEventHandler } from "react";
 import { FaSearch } from "react-icons/fa";
 
 interface Props {
-  dishname: string;
-  setDishname: Function;
+  foodname: string;
+  setFoodname: Function;
   handleButtonClick: MouseEventHandler;
 }
 
 export default function SearchElement({
-  dishname,
-  setDishname,
+  foodname,
+  setFoodname,
   handleButtonClick,
 }: Props) {
   return (
@@ -18,8 +18,8 @@ export default function SearchElement({
         type="text"
         placeholder="Cerca piatti..."
         className="search-input"
-        value={dishname}
-        onChange={(event) => setDishname(event.target.value)}
+        value={foodname}
+        onChange={(event) => setFoodname(event.target.value)}
         onKeyDown={(event) => {
           if (event.key === "Enter") {
             handleButtonClick(event as any);
